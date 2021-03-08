@@ -16,7 +16,6 @@ import re  # noqa: F401
 # python 2 and python 3 compatibility library
 import six
 
-from textrepo_client import ResultAbout
 from textrepo_client.api_client import ApiClient
 
 
@@ -32,7 +31,7 @@ class AboutApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def get_about(self, **kwargs) -> ResultAbout:  # noqa: E501
+    def get_about(self, **kwargs):  # noqa: E501
         """Get info about application version and configuration  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -52,7 +51,7 @@ class AboutApi(object):
             (data) = self.get_about_with_http_info(**kwargs)  # noqa: E501
             return data
 
-    def get_about_with_http_info(self, **kwargs) -> ResultAbout:  # noqa: E501
+    def get_about_with_http_info(self, **kwargs):  # noqa: E501
         """Get info about application version and configuration  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
