@@ -31,12 +31,12 @@ class TaskApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def delete_document(self, external_id, **kwargs):  # noqa: E501
+    def delete_document_recursively(self, external_id, **kwargs):  # noqa: E501
         """Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_document(external_id, async_req=True)
+        >>> thread = api.delete_document_recursively(external_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -47,17 +47,17 @@ class TaskApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.delete_document_with_http_info(external_id, **kwargs)  # noqa: E501
+            return self.delete_document_recursively_with_http_info(external_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.delete_document_with_http_info(external_id, **kwargs)  # noqa: E501
+            (data) = self.delete_document_recursively_with_http_info(external_id, **kwargs)  # noqa: E501
             return data
 
-    def delete_document_with_http_info(self, external_id, **kwargs):  # noqa: E501
+    def delete_document_recursively_with_http_info(self, external_id, **kwargs):  # noqa: E501
         """Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete_document_with_http_info(external_id, async_req=True)
+        >>> thread = api.delete_document_recursively_with_http_info(external_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -78,14 +78,14 @@ class TaskApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method delete_document" % key
+                    " to method delete_document_recursively" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'external_id' is set
         if ('external_id' not in params or
                 params['external_id'] is None):
-            raise ValueError("Missing the required parameter `external_id` when calling `delete_document`")  # noqa: E501
+            raise ValueError("Missing the required parameter `external_id` when calling `delete_document_recursively`")  # noqa: E501
 
         collection_formats = {}
 
@@ -317,7 +317,6 @@ class TaskApi(object):
         :param async_req bool
         :param str external_id: (required)
         :param str type: (required)
-        :param str accept_encoding:
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -340,13 +339,12 @@ class TaskApi(object):
         :param async_req bool
         :param str external_id: (required)
         :param str type: (required)
-        :param str accept_encoding:
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['external_id', 'type', 'accept_encoding']  # noqa: E501
+        all_params = ['external_id', 'type']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -381,8 +379,6 @@ class TaskApi(object):
             query_params.append(('type', params['type']))  # noqa: E501
 
         header_params = {}
-        if 'accept_encoding' in params:
-            header_params['Accept-Encoding'] = params['accept_encoding']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -707,7 +703,7 @@ class TaskApi(object):
             collection_formats=collection_formats)
 
     def index_single_index(self, name, **kwargs):  # noqa: E501
-        """Index or reindex single index with all relevant files, including those without versions  # noqa: E501
+        """Index all files of a single index  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -728,7 +724,7 @@ class TaskApi(object):
             return data
 
     def index_single_index_with_http_info(self, name, **kwargs):  # noqa: E501
-        """Index or reindex single index with all relevant files, including those without versions  # noqa: E501
+        """Index all files of a single index  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True

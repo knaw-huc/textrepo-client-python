@@ -27,78 +27,78 @@ class TestDocumentsApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_delete(self):
-        """Test case for delete
+    def test_create_document(self):
+        """Test case for create_document
 
-        Delete document metadata entry  # noqa: E501
-        """
-        pass
-
-    def test_delete1(self):
-        """Test case for delete1
-
-        Delete document  # noqa: E501
+        Create document  # noqa: E501
         """
         pass
 
     def test_delete_document(self):
         """Test case for delete_document
 
+        Delete document  # noqa: E501
+        """
+        pass
+
+    def test_delete_document_metadata_entry(self):
+        """Test case for delete_document_metadata_entry
+
+        Delete document metadata entry  # noqa: E501
+        """
+        pass
+
+    def test_delete_document_recursively(self):
+        """Test case for delete_document_recursively
+
         Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.  # noqa: E501
         """
         pass
 
-    def test_get1(self):
-        """Test case for get1
-
-        Retrieve document files  # noqa: E501
-        """
-        pass
-
-    def test_get2(self):
-        """Test case for get2
-
-        Retrieve document metadata  # noqa: E501
-        """
-        pass
-
-    def test_get3(self):
-        """Test case for get3
+    def test_get_document(self):
+        """Test case for get_document
 
         Retrieve document  # noqa: E501
         """
         pass
 
-    def test_get4(self):
-        """Test case for get4
+    def test_get_document_files(self):
+        """Test case for get_document_files
+
+        Retrieve document files  # noqa: E501
+        """
+        pass
+
+    def test_get_document_metadata(self):
+        """Test case for get_document_metadata
+
+        Retrieve document metadata  # noqa: E501
+        """
+        pass
+
+    def test_get_documents(self):
+        """Test case for get_documents
 
         Retrieve documents, newest first  # noqa: E501
         """
         pass
 
-    def test_post(self):
-        """Test case for post
+    def test_post_document_metadata_is_not_allowed(self):
+        """Test case for post_document_metadata_is_not_allowed
 
         Not allowed to post metadata: use put instead  # noqa: E501
         """
         pass
 
-    def test_post1(self):
-        """Test case for post1
-
-        Create document  # noqa: E501
-        """
-        pass
-
-    def test_put(self):
-        """Test case for put
+    def test_put_document(self):
+        """Test case for put_document
 
         Create or update document  # noqa: E501
         """
         pass
 
-    def test_update(self):
-        """Test case for update
+    def test_put_document_metadata_entry(self):
+        """Test case for put_document_metadata_entry
 
         Create or update document metadata entry  # noqa: E501
         """

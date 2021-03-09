@@ -27,36 +27,36 @@ class TestContentsApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_delete5(self):
-        """Test case for delete5
+    def test_delete_version_contents_is_not_allowed(self):
+        """Test case for delete_version_contents_is_not_allowed
 
         Not allowed to delete contents of version: delete version instead  # noqa: E501
         """
         pass
 
-    def test_get(self):
-        """Test case for get
+    def test_get_contents(self):
+        """Test case for get_contents
 
         Retrieve contents  # noqa: E501
         """
         pass
 
-    def test_get8(self):
-        """Test case for get8
+    def test_get_version_contents(self):
+        """Test case for get_version_contents
 
         Retrieve version contents  # noqa: E501
         """
         pass
 
-    def test_post5(self):
-        """Test case for post5
+    def test_post_version_contents_is_not_allowed(self):
+        """Test case for post_version_contents_is_not_allowed
 
         Not allowed to post contents: post new version instead  # noqa: E501
         """
         pass
 
-    def test_put4(self):
-        """Test case for put4
+    def test_put_version_contents_is_not_allowed(self):
+        """Test case for put_version_contents_is_not_allowed
 
         Not allowed to put contents of version: post new version instead  # noqa: E501
         """

@@ -27,45 +27,38 @@ class TestVersionsApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_delete5(self):
-        """Test case for delete5
+    def test_create_version(self):
+        """Test case for create_version
 
-        Not allowed to delete contents of version: delete version instead  # noqa: E501
+        Create version  # noqa: E501
         """
         pass
 
-    def test_delete6(self):
-        """Test case for delete6
-
-        Delete document metadata entry  # noqa: E501
-        """
-        pass
-
-    def test_delete7(self):
-        """Test case for delete7
+    def test_delete_version(self):
+        """Test case for delete_version
 
         Delete version  # noqa: E501
         """
         pass
 
-    def test_get10(self):
-        """Test case for get10
+    def test_delete_version_contents_is_not_allowed(self):
+        """Test case for delete_version_contents_is_not_allowed
+
+        Not allowed to delete contents of version: delete version instead  # noqa: E501
+        """
+        pass
+
+    def test_get_version(self):
+        """Test case for get_version
 
         Retrieve version  # noqa: E501
         """
         pass
 
-    def test_get8(self):
-        """Test case for get8
+    def test_get_version_contents(self):
+        """Test case for get_version_contents
 
         Retrieve version contents  # noqa: E501
-        """
-        pass
-
-    def test_get9(self):
-        """Test case for get9
-
-        Retrieve version metadata  # noqa: E501
         """
         pass
 
@@ -76,43 +69,22 @@ class TestVersionsApi(unittest.TestCase):
         """
         pass
 
-    def test_post5(self):
-        """Test case for post5
+    def test_post_version_contents_is_not_allowed(self):
+        """Test case for post_version_contents_is_not_allowed
 
         Not allowed to post contents: post new version instead  # noqa: E501
         """
         pass
 
-    def test_post6(self):
-        """Test case for post6
-
-        Not allowed to post metadata: use put instead  # noqa: E501
-        """
-        pass
-
-    def test_post7(self):
-        """Test case for post7
-
-        Create version  # noqa: E501
-        """
-        pass
-
-    def test_put4(self):
-        """Test case for put4
+    def test_put_version_contents_is_not_allowed(self):
+        """Test case for put_version_contents_is_not_allowed
 
         Not allowed to put contents of version: post new version instead  # noqa: E501
         """
         pass
 
-    def test_put5(self):
-        """Test case for put5
-
-        Create or update version metadata entry  # noqa: E501
-        """
-        pass
-
-    def test_put6(self):
-        """Test case for put6
+    def test_put_version_is_not_allowed(self):
+        """Test case for put_version_is_not_allowed
 
         Not allowed to update a version: create a new version using POST  # noqa: E501
         """

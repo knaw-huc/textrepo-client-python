@@ -218,7 +218,7 @@ class IndexApi(object):
             collection_formats=collection_formats)
 
     def index_single_index(self, name, **kwargs):  # noqa: E501
-        """Index or reindex single index with all relevant files, including those without versions  # noqa: E501
+        """Index all files of a single index  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -239,7 +239,7 @@ class IndexApi(object):
             return data
 
     def index_single_index_with_http_info(self, name, **kwargs):  # noqa: E501
-        """Index or reindex single index with all relevant files, including those without versions  # noqa: E501
+        """Index all files of a single index  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True

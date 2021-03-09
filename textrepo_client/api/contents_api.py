@@ -31,12 +31,12 @@ class ContentsApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def delete5(self, **kwargs):  # noqa: E501
+    def delete_version_contents_is_not_allowed(self, **kwargs):  # noqa: E501
         """Not allowed to delete contents of version: delete version instead  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete5(async_req=True)
+        >>> thread = api.delete_version_contents_is_not_allowed(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -46,17 +46,17 @@ class ContentsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.delete5_with_http_info(**kwargs)  # noqa: E501
+            return self.delete_version_contents_is_not_allowed_with_http_info(**kwargs)  # noqa: E501
         else:
-            (data) = self.delete5_with_http_info(**kwargs)  # noqa: E501
+            (data) = self.delete_version_contents_is_not_allowed_with_http_info(**kwargs)  # noqa: E501
             return data
 
-    def delete5_with_http_info(self, **kwargs):  # noqa: E501
+    def delete_version_contents_is_not_allowed_with_http_info(self, **kwargs):  # noqa: E501
         """Not allowed to delete contents of version: delete version instead  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.delete5_with_http_info(async_req=True)
+        >>> thread = api.delete_version_contents_is_not_allowed_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -76,7 +76,7 @@ class ContentsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method delete5" % key
+                    " to method delete_version_contents_is_not_allowed" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -112,45 +112,43 @@ class ContentsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get(self, sha, **kwargs):  # noqa: E501
+    def get_contents(self, sha, **kwargs):  # noqa: E501
         """Retrieve contents  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get(sha, async_req=True)
+        >>> thread = api.get_contents(sha, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str sha: (required)
-        :param str accept_encoding:
         :return: list[str]
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_with_http_info(sha, **kwargs)  # noqa: E501
+            return self.get_contents_with_http_info(sha, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_with_http_info(sha, **kwargs)  # noqa: E501
+            (data) = self.get_contents_with_http_info(sha, **kwargs)  # noqa: E501
             return data
 
-    def get_with_http_info(self, sha, **kwargs):  # noqa: E501
+    def get_contents_with_http_info(self, sha, **kwargs):  # noqa: E501
         """Retrieve contents  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_with_http_info(sha, async_req=True)
+        >>> thread = api.get_contents_with_http_info(sha, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str sha: (required)
-        :param str accept_encoding:
         :return: list[str]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['sha', 'accept_encoding']  # noqa: E501
+        all_params = ['sha']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -161,14 +159,14 @@ class ContentsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get" % key
+                    " to method get_contents" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'sha' is set
         if ('sha' not in params or
                 params['sha'] is None):
-            raise ValueError("Missing the required parameter `sha` when calling `get`")  # noqa: E501
+            raise ValueError("Missing the required parameter `sha` when calling `get_contents`")  # noqa: E501
 
         collection_formats = {}
 
@@ -179,8 +177,6 @@ class ContentsApi(object):
         query_params = []
 
         header_params = {}
-        if 'accept_encoding' in params:
-            header_params['Accept-Encoding'] = params['accept_encoding']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -209,45 +205,43 @@ class ContentsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get8(self, version_id, **kwargs):  # noqa: E501
+    def get_version_contents(self, version_id, **kwargs):  # noqa: E501
         """Retrieve version contents  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get8(version_id, async_req=True)
+        >>> thread = api.get_version_contents(version_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str version_id: (required)
-        :param str accept_encoding:
         :return: ResultVersion
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get8_with_http_info(version_id, **kwargs)  # noqa: E501
+            return self.get_version_contents_with_http_info(version_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.get8_with_http_info(version_id, **kwargs)  # noqa: E501
+            (data) = self.get_version_contents_with_http_info(version_id, **kwargs)  # noqa: E501
             return data
 
-    def get8_with_http_info(self, version_id, **kwargs):  # noqa: E501
+    def get_version_contents_with_http_info(self, version_id, **kwargs):  # noqa: E501
         """Retrieve version contents  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get8_with_http_info(version_id, async_req=True)
+        >>> thread = api.get_version_contents_with_http_info(version_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str version_id: (required)
-        :param str accept_encoding:
         :return: ResultVersion
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['version_id', 'accept_encoding']  # noqa: E501
+        all_params = ['version_id']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -258,14 +252,14 @@ class ContentsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get8" % key
+                    " to method get_version_contents" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'version_id' is set
         if ('version_id' not in params or
                 params['version_id'] is None):
-            raise ValueError("Missing the required parameter `version_id` when calling `get8`")  # noqa: E501
+            raise ValueError("Missing the required parameter `version_id` when calling `get_version_contents`")  # noqa: E501
 
         collection_formats = {}
 
@@ -276,8 +270,6 @@ class ContentsApi(object):
         query_params = []
 
         header_params = {}
-        if 'accept_encoding' in params:
-            header_params['Accept-Encoding'] = params['accept_encoding']  # noqa: E501
 
         form_params = []
         local_var_files = {}
@@ -306,12 +298,12 @@ class ContentsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def post5(self, **kwargs):  # noqa: E501
+    def post_version_contents_is_not_allowed(self, **kwargs):  # noqa: E501
         """Not allowed to post contents: post new version instead  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post5(async_req=True)
+        >>> thread = api.post_version_contents_is_not_allowed(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -321,17 +313,17 @@ class ContentsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.post5_with_http_info(**kwargs)  # noqa: E501
+            return self.post_version_contents_is_not_allowed_with_http_info(**kwargs)  # noqa: E501
         else:
-            (data) = self.post5_with_http_info(**kwargs)  # noqa: E501
+            (data) = self.post_version_contents_is_not_allowed_with_http_info(**kwargs)  # noqa: E501
             return data
 
-    def post5_with_http_info(self, **kwargs):  # noqa: E501
+    def post_version_contents_is_not_allowed_with_http_info(self, **kwargs):  # noqa: E501
         """Not allowed to post contents: post new version instead  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.post5_with_http_info(async_req=True)
+        >>> thread = api.post_version_contents_is_not_allowed_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -351,7 +343,7 @@ class ContentsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method post5" % key
+                    " to method post_version_contents_is_not_allowed" % key
                 )
             params[key] = val
         del params['kwargs']
@@ -387,12 +379,12 @@ class ContentsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def put4(self, **kwargs):  # noqa: E501
+    def put_version_contents_is_not_allowed(self, **kwargs):  # noqa: E501
         """Not allowed to put contents of version: post new version instead  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.put4(async_req=True)
+        >>> thread = api.put_version_contents_is_not_allowed(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -402,17 +394,17 @@ class ContentsApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.put4_with_http_info(**kwargs)  # noqa: E501
+            return self.put_version_contents_is_not_allowed_with_http_info(**kwargs)  # noqa: E501
         else:
-            (data) = self.put4_with_http_info(**kwargs)  # noqa: E501
+            (data) = self.put_version_contents_is_not_allowed_with_http_info(**kwargs)  # noqa: E501
             return data
 
-    def put4_with_http_info(self, **kwargs):  # noqa: E501
+    def put_version_contents_is_not_allowed_with_http_info(self, **kwargs):  # noqa: E501
         """Not allowed to put contents of version: post new version instead  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.put4_with_http_info(async_req=True)
+        >>> thread = api.put_version_contents_is_not_allowed_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -432,7 +424,7 @@ class ContentsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method put4" % key
+                    " to method put_version_contents_is_not_allowed" % key
                 )
             params[key] = val
         del params['kwargs']

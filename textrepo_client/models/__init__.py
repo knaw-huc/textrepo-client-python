@@ -21,12 +21,8 @@ from textrepo_client.models.form_text_repo_file import FormTextRepoFile
 from textrepo_client.models.form_type import FormType
 from textrepo_client.models.form_version import FormVersion
 from textrepo_client.models.input_stream import InputStream
-from textrepo_client.models.result_about import ResultAbout
-from textrepo_client.models.result_about_version import ResultAboutVersion
 from textrepo_client.models.result_document import ResultDocument
 from textrepo_client.models.result_documents_overview import ResultDocumentsOverview
-from textrepo_client.models.result_indexer import ResultIndexer
-from textrepo_client.models.result_indexer_fields_configuration import ResultIndexerFieldsConfiguration
 from textrepo_client.models.result_page import ResultPage
 from textrepo_client.models.result_page_params import ResultPageParams
 from textrepo_client.models.result_page_result_document import ResultPageResultDocument

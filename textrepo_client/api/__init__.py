@@ -3,7 +3,6 @@ from __future__ import absolute_import
 # flake8: noqa
 
 # import apis into api package
-from textrepo_client.api.about_api import AboutApi
 from textrepo_client.api.contents_api import ContentsApi
 from textrepo_client.api.dashboard_api import DashboardApi
 from textrepo_client.api.documents_api import DocumentsApi

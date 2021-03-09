@@ -27,36 +27,36 @@ class TestTypesApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_delete4(self):
-        """Test case for delete4
-
-        Delete type  # noqa: E501
-        """
-        pass
-
-    def test_get7(self):
-        """Test case for get7
-
-        Retrieve types  # noqa: E501
-        """
-        pass
-
-    def test_get_all(self):
-        """Test case for get_all
-
-        Retrieve types  # noqa: E501
-        """
-        pass
-
-    def test_post4(self):
-        """Test case for post4
+    def test_create_type(self):
+        """Test case for create_type
 
         Create type  # noqa: E501
         """
         pass
 
-    def test_put3(self):
-        """Test case for put3
+    def test_delete_type(self):
+        """Test case for delete_type
+
+        Delete type  # noqa: E501
+        """
+        pass
+
+    def test_get_type(self):
+        """Test case for get_type
+
+        Retrieve types  # noqa: E501
+        """
+        pass
+
+    def test_get_types(self):
+        """Test case for get_types
+
+        Retrieve types  # noqa: E501
+        """
+        pass
+
+    def test_put_type(self):
+        """Test case for put_type
 
         Create or update type  # noqa: E501
         """

@@ -4,19 +4,19 @@ All URIs are relative to */api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**delete_document**](TaskApi.md#delete_document) | **DELETE** /task/delete/documents/{externalId} | Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.
+[**delete_document_recursively**](TaskApi.md#delete_document_recursively) | **DELETE** /task/delete/documents/{externalId} | Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.
 [**get_document_metadata**](TaskApi.md#get_document_metadata) | **GET** /task/find/{externalId}/document/metadata | Find metadata of document by external ID, with header links to original and parent resource
 [**get_file_metadata**](TaskApi.md#get_file_metadata) | **GET** /task/find/{externalId}/file/metadata | Find metadata of file by external ID and file type, with header links to original, parent and type resource
 [**get_latest_file_version_content**](TaskApi.md#get_latest_file_version_content) | **GET** /task/find/{externalId}/file/contents | Find contents of latest file version by external ID and file type, with header links to version history, parent and type resource
 [**import_document_contents_for_file_with_type**](TaskApi.md#import_document_contents_for_file_with_type) | **POST** /task/import/documents/{externalId}/{typeName} | Import file as the current version for {typeName} of document referenced by {externalId} without indexing
 [**index_all**](TaskApi.md#index_all) | **POST** /task/index/files/{type} | Index all files by type
 [**index_document**](TaskApi.md#index_document) | **POST** /task/index/document/{externalId}/{type} | Index file of document by externalId and file type
-[**index_single_index**](TaskApi.md#index_single_index) | **POST** /task/index/{name} | Index or reindex single index with all relevant files, including those without versions
+[**index_single_index**](TaskApi.md#index_single_index) | **POST** /task/index/{name} | Index all files of a single index
 [**post_identifiers**](TaskApi.md#post_identifiers) | **POST** /task/register | 
 [**put_identifiers**](TaskApi.md#put_identifiers) | **PUT** /task/register | 
 
-# **delete_document**
-> delete_document(external_id)
+# **delete_document_recursively**
+> delete_document_recursively(external_id)
 
 Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.
 
@@ -34,9 +34,9 @@ external_id = 'external_id_example' # str |
 
 try:
     # Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.
-    api_instance.delete_document(external_id)
+    api_instance.delete_document_recursively(external_id)
 except ApiException as e:
-    print("Exception when calling TaskApi->delete_document: %s\n" % e)
+    print("Exception when calling TaskApi->delete_document_recursively: %s\n" % e)
 ```
 
 ### Parameters
@@ -153,7 +153,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_latest_file_version_content**
-> get_latest_file_version_content(external_id, type, accept_encoding=accept_encoding)
+> get_latest_file_version_content(external_id, type)
 
 Find contents of latest file version by external ID and file type, with header links to version history, parent and type resource
 
@@ -169,11 +169,10 @@ from pprint import pprint
 api_instance = textrepo_client.TaskApi()
 external_id = 'external_id_example' # str | 
 type = 'type_example' # str | 
-accept_encoding = 'accept_encoding_example' # str |  (optional)
 
 try:
     # Find contents of latest file version by external ID and file type, with header links to version history, parent and type resource
-    api_instance.get_latest_file_version_content(external_id, type, accept_encoding=accept_encoding)
+    api_instance.get_latest_file_version_content(external_id, type)
 except ApiException as e:
     print("Exception when calling TaskApi->get_latest_file_version_content: %s\n" % e)
 ```
@@ -184,7 +183,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **external_id** | **str**|  | 
  **type** | **str**|  | 
- **accept_encoding** | **str**|  | [optional] 
 
 ### Return type
 
@@ -347,7 +345,7 @@ No authorization required
 # **index_single_index**
 > index_single_index(name)
 
-Index or reindex single index with all relevant files, including those without versions
+Index all files of a single index
 
 ### Example
 ```python
@@ -362,7 +360,7 @@ api_instance = textrepo_client.TaskApi()
 name = 'name_example' # str | 
 
 try:
-    # Index or reindex single index with all relevant files, including those without versions
+    # Index all files of a single index
     api_instance.index_single_index(name)
 except ApiException as e:
     print("Exception when calling TaskApi->index_single_index: %s\n" % e)

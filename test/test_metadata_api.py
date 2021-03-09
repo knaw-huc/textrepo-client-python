@@ -27,45 +27,24 @@ class TestMetadataApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_delete(self):
-        """Test case for delete
+    def test_delete_document_metadata_entry(self):
+        """Test case for delete_document_metadata_entry
 
         Delete document metadata entry  # noqa: E501
         """
         pass
 
-    def test_delete2(self):
-        """Test case for delete2
+    def test_delete_file_metadata_entry(self):
+        """Test case for delete_file_metadata_entry
 
-        Delete document metadata entry  # noqa: E501
+        Delete file metadata entry  # noqa: E501
         """
         pass
 
-    def test_delete6(self):
-        """Test case for delete6
-
-        Delete document metadata entry  # noqa: E501
-        """
-        pass
-
-    def test_get2(self):
-        """Test case for get2
+    def test_get_document_metadata(self):
+        """Test case for get_document_metadata
 
         Retrieve document metadata  # noqa: E501
-        """
-        pass
-
-    def test_get5(self):
-        """Test case for get5
-
-        Retrieve file metadata  # noqa: E501
-        """
-        pass
-
-    def test_get9(self):
-        """Test case for get9
-
-        Retrieve version metadata  # noqa: E501
         """
         pass
 
@@ -76,45 +55,38 @@ class TestMetadataApi(unittest.TestCase):
         """
         pass
 
-    def test_post(self):
-        """Test case for post
+    def test_get_file_metadata(self):
+        """Test case for get_file_metadata
+
+        Retrieve file metadata  # noqa: E501
+        """
+        pass
+
+    def test_post_document_metadata_is_not_allowed(self):
+        """Test case for post_document_metadata_is_not_allowed
 
         Not allowed to post metadata: use put instead  # noqa: E501
         """
         pass
 
-    def test_post2(self):
-        """Test case for post2
+    def test_post_metadata_is_not_allowed(self):
+        """Test case for post_metadata_is_not_allowed
 
         Not allowed to post metadata: use put instead  # noqa: E501
         """
         pass
 
-    def test_post6(self):
-        """Test case for post6
-
-        Not allowed to post metadata: use put instead  # noqa: E501
-        """
-        pass
-
-    def test_put1(self):
-        """Test case for put1
-
-        Create or update file metadata entry  # noqa: E501
-        """
-        pass
-
-    def test_put5(self):
-        """Test case for put5
-
-        Create or update version metadata entry  # noqa: E501
-        """
-        pass
-
-    def test_update(self):
-        """Test case for update
+    def test_put_document_metadata_entry(self):
+        """Test case for put_document_metadata_entry
 
         Create or update document metadata entry  # noqa: E501
+        """
+        pass
+
+    def test_put_file_metadata_entry(self):
+        """Test case for put_file_metadata_entry
+
+        Create or update file metadata entry  # noqa: E501
         """
         pass
 

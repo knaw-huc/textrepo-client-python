@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**index_all**](IndexApi.md#index_all) | **POST** /task/index/files/{type} | Index all files by type
 [**index_document**](IndexApi.md#index_document) | **POST** /task/index/document/{externalId}/{type} | Index file of document by externalId and file type
-[**index_single_index**](IndexApi.md#index_single_index) | **POST** /task/index/{name} | Index or reindex single index with all relevant files, including those without versions
+[**index_single_index**](IndexApi.md#index_single_index) | **POST** /task/index/{name} | Index all files of a single index
 
 # **index_all**
 > index_all(type)
@@ -103,7 +103,7 @@ No authorization required
 # **index_single_index**
 > index_single_index(name)
 
-Index or reindex single index with all relevant files, including those without versions
+Index all files of a single index
 
 ### Example
 ```python
@@ -118,7 +118,7 @@ api_instance = textrepo_client.IndexApi()
 name = 'name_example' # str | 
 
 try:
-    # Index or reindex single index with all relevant files, including those without versions
+    # Index all files of a single index
     api_instance.index_single_index(name)
 except ApiException as e:
     print("Exception when calling IndexApi->index_single_index: %s\n" % e)

@@ -27,31 +27,38 @@ class TestFilesApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_delete2(self):
-        """Test case for delete2
+    def test_create_file(self):
+        """Test case for create_file
 
-        Delete document metadata entry  # noqa: E501
+        Create file  # noqa: E501
         """
         pass
 
-    def test_delete3(self):
-        """Test case for delete3
+    def test_delete_file(self):
+        """Test case for delete_file
 
         Delete file  # noqa: E501
         """
         pass
 
-    def test_get5(self):
-        """Test case for get5
+    def test_delete_file_metadata_entry(self):
+        """Test case for delete_file_metadata_entry
 
-        Retrieve file metadata  # noqa: E501
+        Delete file metadata entry  # noqa: E501
         """
         pass
 
-    def test_get6(self):
-        """Test case for get6
+    def test_get_file(self):
+        """Test case for get_file
 
         Retrieve file  # noqa: E501
+        """
+        pass
+
+    def test_get_file_metadata(self):
+        """Test case for get_file_metadata
+
+        Retrieve file metadata  # noqa: E501
         """
         pass
 
@@ -62,31 +69,24 @@ class TestFilesApi(unittest.TestCase):
         """
         pass
 
-    def test_post2(self):
-        """Test case for post2
+    def test_post_metadata_is_not_allowed(self):
+        """Test case for post_metadata_is_not_allowed
 
         Not allowed to post metadata: use put instead  # noqa: E501
         """
         pass
 
-    def test_post3(self):
-        """Test case for post3
-
-        Create file  # noqa: E501
-        """
-        pass
-
-    def test_put1(self):
-        """Test case for put1
-
-        Create or update file metadata entry  # noqa: E501
-        """
-        pass
-
-    def test_put2(self):
-        """Test case for put2
+    def test_put_file(self):
+        """Test case for put_file
 
         Create or update file  # noqa: E501
+        """
+        pass
+
+    def test_put_file_metadata_entry(self):
+        """Test case for put_file_metadata_entry
+
+        Create or update file metadata entry  # noqa: E501
         """
         pass
 

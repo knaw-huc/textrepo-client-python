@@ -27,8 +27,8 @@ class TestTaskApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_delete_document(self):
-        """Test case for delete_document
+    def test_delete_document_recursively(self):
+        """Test case for delete_document_recursively
 
         Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.  # noqa: E501
         """
@@ -79,7 +79,7 @@ class TestTaskApi(unittest.TestCase):
     def test_index_single_index(self):
         """Test case for index_single_index
 
-        Index or reindex single index with all relevant files, including those without versions  # noqa: E501
+        Index all files of a single index  # noqa: E501
         """
         pass
 

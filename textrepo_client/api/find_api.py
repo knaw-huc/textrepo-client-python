@@ -228,7 +228,6 @@ class FindApi(object):
         :param async_req bool
         :param str external_id: (required)
         :param str type: (required)
-        :param str accept_encoding:
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -251,13 +250,12 @@ class FindApi(object):
         :param async_req bool
         :param str external_id: (required)
         :param str type: (required)
-        :param str accept_encoding:
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['external_id', 'type', 'accept_encoding']  # noqa: E501
+        all_params = ['external_id', 'type']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -292,8 +290,6 @@ class FindApi(object):
             query_params.append(('type', params['type']))  # noqa: E501
 
         header_params = {}
-        if 'accept_encoding' in params:
-            header_params['Accept-Encoding'] = params['accept_encoding']  # noqa: E501
 
         form_params = []
         local_var_files = {}

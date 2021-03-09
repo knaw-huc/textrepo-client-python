@@ -17,9 +17,9 @@ Python 2.7 and 3.4+
 If the python package is hosted on Github, you can install directly from Github
 
 ```sh
-pip install git+https://github.com/knaw-huc/textrepo-client-python.git
+pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
 ```
-(you may need to run `pip` with root permission: `sudo pip install git+https://github.com/knaw-huc/textrepo-client-python.git`)
+(you may need to run `pip` with root permission: `sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git`)
 
 Then import the package:
 ```python
@@ -52,14 +52,53 @@ from textrepo_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = textrepo_client.AboutApi(textrepo_client.ApiClient(configuration))
+api_instance = textrepo_client.ContentsApi(textrepo_client.ApiClient(configuration))
 
 try:
-    # Get info about application version and configuration
-    api_response = api_instance.get_about()
+    # Not allowed to delete contents of version: delete version instead
+    api_instance.delete_version_contents_is_not_allowed()
+except ApiException as e:
+    print("Exception when calling ContentsApi->delete_version_contents_is_not_allowed: %s\n" % e)
+
+# create an instance of the API class
+api_instance = textrepo_client.ContentsApi(textrepo_client.ApiClient(configuration))
+sha = 'sha_example' # str | 
+
+try:
+    # Retrieve contents
+    api_response = api_instance.get_contents(sha)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling AboutApi->get_about: %s\n" % e)
+    print("Exception when calling ContentsApi->get_contents: %s\n" % e)
+
+# create an instance of the API class
+api_instance = textrepo_client.ContentsApi(textrepo_client.ApiClient(configuration))
+version_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
+
+try:
+    # Retrieve version contents
+    api_response = api_instance.get_version_contents(version_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling ContentsApi->get_version_contents: %s\n" % e)
+
+# create an instance of the API class
+api_instance = textrepo_client.ContentsApi(textrepo_client.ApiClient(configuration))
+
+try:
+    # Not allowed to post contents: post new version instead
+    api_instance.post_version_contents_is_not_allowed()
+except ApiException as e:
+    print("Exception when calling ContentsApi->post_version_contents_is_not_allowed: %s\n" % e)
+
+# create an instance of the API class
+api_instance = textrepo_client.ContentsApi(textrepo_client.ApiClient(configuration))
+
+try:
+    # Not allowed to put contents of version: post new version instead
+    api_instance.put_version_contents_is_not_allowed()
+except ApiException as e:
+    print("Exception when calling ContentsApi->put_version_contents_is_not_allowed: %s\n" % e)
 ```
 
 ## Documentation for API Endpoints
@@ -68,86 +107,77 @@ All URIs are relative to */api*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AboutApi* | [**get_about**](docs/AboutApi.md#get_about) | **GET** / | Get info about application version and configuration
-*ContentsApi* | [**delete5**](docs/ContentsApi.md#delete5) | **DELETE** /rest/versions/{versionId}/contents | Not allowed to delete contents of version: delete version instead
-*ContentsApi* | [**get**](docs/ContentsApi.md#get) | **GET** /rest/contents/{sha} | Retrieve contents
-*ContentsApi* | [**get8**](docs/ContentsApi.md#get8) | **GET** /rest/versions/{versionId}/contents | Retrieve version contents
-*ContentsApi* | [**post5**](docs/ContentsApi.md#post5) | **POST** /rest/versions/{versionId}/contents | Not allowed to post contents: post new version instead
-*ContentsApi* | [**put4**](docs/ContentsApi.md#put4) | **PUT** /rest/versions/{versionId}/contents | Not allowed to put contents of version: post new version instead
+*ContentsApi* | [**delete_version_contents_is_not_allowed**](docs/ContentsApi.md#delete_version_contents_is_not_allowed) | **DELETE** /rest/versions/{versionId}/contents | Not allowed to delete contents of version: delete version instead
+*ContentsApi* | [**get_contents**](docs/ContentsApi.md#get_contents) | **GET** /rest/contents/{sha} | Retrieve contents
+*ContentsApi* | [**get_version_contents**](docs/ContentsApi.md#get_version_contents) | **GET** /rest/versions/{versionId}/contents | Retrieve version contents
+*ContentsApi* | [**post_version_contents_is_not_allowed**](docs/ContentsApi.md#post_version_contents_is_not_allowed) | **POST** /rest/versions/{versionId}/contents | Not allowed to post contents: post new version instead
+*ContentsApi* | [**put_version_contents_is_not_allowed**](docs/ContentsApi.md#put_version_contents_is_not_allowed) | **PUT** /rest/versions/{versionId}/contents | Not allowed to put contents of version: post new version instead
 *DashboardApi* | [**count_documents_by_metadata_key**](docs/DashboardApi.md#count_documents_by_metadata_key) | **GET** /dashboard/metadata | Get document count breakdown by metadata key (yields Map: key -&gt; count)
 *DashboardApi* | [**count_documents_by_metadata_value**](docs/DashboardApi.md#count_documents_by_metadata_value) | **GET** /dashboard/metadata/{key} | Get document count breakdown by metadata value for given metadata key
 *DashboardApi* | [**find_orphans**](docs/DashboardApi.md#find_orphans) | **GET** /dashboard/orphans | Find orphans: documents with neither metadata nor any associated files
 *DashboardApi* | [**get_stats**](docs/DashboardApi.md#get_stats) | **GET** /dashboard | Get document count overview
-*DocumentsApi* | [**delete**](docs/DocumentsApi.md#delete) | **DELETE** /rest/documents/{docId}/metadata/{key} | Delete document metadata entry
-*DocumentsApi* | [**delete1**](docs/DocumentsApi.md#delete1) | **DELETE** /rest/documents/{id} | Delete document
-*DocumentsApi* | [**delete_document**](docs/DocumentsApi.md#delete_document) | **DELETE** /task/delete/documents/{externalId} | Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.
-*DocumentsApi* | [**get1**](docs/DocumentsApi.md#get1) | **GET** /rest/documents/{docId}/files | Retrieve document files
-*DocumentsApi* | [**get2**](docs/DocumentsApi.md#get2) | **GET** /rest/documents/{docId}/metadata | Retrieve document metadata
-*DocumentsApi* | [**get3**](docs/DocumentsApi.md#get3) | **GET** /rest/documents/{id} | Retrieve document
-*DocumentsApi* | [**get4**](docs/DocumentsApi.md#get4) | **GET** /rest/documents | Retrieve documents, newest first
-*DocumentsApi* | [**post**](docs/DocumentsApi.md#post) | **POST** /rest/documents/{docId}/metadata | Not allowed to post metadata: use put instead
-*DocumentsApi* | [**post1**](docs/DocumentsApi.md#post1) | **POST** /rest/documents | Create document
-*DocumentsApi* | [**put**](docs/DocumentsApi.md#put) | **PUT** /rest/documents/{id} | Create or update document
-*DocumentsApi* | [**update**](docs/DocumentsApi.md#update) | **PUT** /rest/documents/{docId}/metadata/{key} | Create or update document metadata entry
-*FilesApi* | [**delete2**](docs/FilesApi.md#delete2) | **DELETE** /rest/files/{fileId}/metadata/{key} | Delete document metadata entry
-*FilesApi* | [**delete3**](docs/FilesApi.md#delete3) | **DELETE** /rest/files/{id} | Delete file
-*FilesApi* | [**get5**](docs/FilesApi.md#get5) | **GET** /rest/files/{fileId}/metadata | Retrieve file metadata
-*FilesApi* | [**get6**](docs/FilesApi.md#get6) | **GET** /rest/files/{id} | Retrieve file
+*DocumentsApi* | [**create_document**](docs/DocumentsApi.md#create_document) | **POST** /rest/documents | Create document
+*DocumentsApi* | [**delete_document**](docs/DocumentsApi.md#delete_document) | **DELETE** /rest/documents/{id} | Delete document
+*DocumentsApi* | [**delete_document_metadata_entry**](docs/DocumentsApi.md#delete_document_metadata_entry) | **DELETE** /rest/documents/{docId}/metadata/{key} | Delete document metadata entry
+*DocumentsApi* | [**delete_document_recursively**](docs/DocumentsApi.md#delete_document_recursively) | **DELETE** /task/delete/documents/{externalId} | Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.
+*DocumentsApi* | [**get_document**](docs/DocumentsApi.md#get_document) | **GET** /rest/documents/{id} | Retrieve document
+*DocumentsApi* | [**get_document_files**](docs/DocumentsApi.md#get_document_files) | **GET** /rest/documents/{docId}/files | Retrieve document files
+*DocumentsApi* | [**get_document_metadata**](docs/DocumentsApi.md#get_document_metadata) | **GET** /rest/documents/{docId}/metadata | Retrieve document metadata
+*DocumentsApi* | [**get_documents**](docs/DocumentsApi.md#get_documents) | **GET** /rest/documents | Retrieve documents, newest first
+*DocumentsApi* | [**post_document_metadata_is_not_allowed**](docs/DocumentsApi.md#post_document_metadata_is_not_allowed) | **POST** /rest/documents/{docId}/metadata | Not allowed to post metadata: use put instead
+*DocumentsApi* | [**put_document**](docs/DocumentsApi.md#put_document) | **PUT** /rest/documents/{id} | Create or update document
+*DocumentsApi* | [**put_document_metadata_entry**](docs/DocumentsApi.md#put_document_metadata_entry) | **PUT** /rest/documents/{docId}/metadata/{key} | Create or update document metadata entry
+*FilesApi* | [**create_file**](docs/FilesApi.md#create_file) | **POST** /rest/files | Create file
+*FilesApi* | [**delete_file**](docs/FilesApi.md#delete_file) | **DELETE** /rest/files/{id} | Delete file
+*FilesApi* | [**delete_file_metadata_entry**](docs/FilesApi.md#delete_file_metadata_entry) | **DELETE** /rest/files/{fileId}/metadata/{key} | Delete file metadata entry
+*FilesApi* | [**get_file**](docs/FilesApi.md#get_file) | **GET** /rest/files/{id} | Retrieve file
+*FilesApi* | [**get_file_metadata**](docs/FilesApi.md#get_file_metadata) | **GET** /rest/files/{fileId}/metadata | Retrieve file metadata
 *FilesApi* | [**get_versions**](docs/FilesApi.md#get_versions) | **GET** /rest/files/{fileId}/versions | Retrieve file versions, newest first
-*FilesApi* | [**post2**](docs/FilesApi.md#post2) | **POST** /rest/files/{fileId}/metadata | Not allowed to post metadata: use put instead
-*FilesApi* | [**post3**](docs/FilesApi.md#post3) | **POST** /rest/files | Create file
-*FilesApi* | [**put1**](docs/FilesApi.md#put1) | **PUT** /rest/files/{fileId}/metadata/{key} | Create or update file metadata entry
-*FilesApi* | [**put2**](docs/FilesApi.md#put2) | **PUT** /rest/files/{id} | Create or update file
+*FilesApi* | [**post_metadata_is_not_allowed**](docs/FilesApi.md#post_metadata_is_not_allowed) | **POST** /rest/files/{fileId}/metadata | Not allowed to post metadata: use put instead
+*FilesApi* | [**put_file**](docs/FilesApi.md#put_file) | **PUT** /rest/files/{id} | Create or update file
+*FilesApi* | [**put_file_metadata_entry**](docs/FilesApi.md#put_file_metadata_entry) | **PUT** /rest/files/{fileId}/metadata/{key} | Create or update file metadata entry
 *FindApi* | [**get_document_metadata**](docs/FindApi.md#get_document_metadata) | **GET** /task/find/{externalId}/document/metadata | Find metadata of document by external ID, with header links to original and parent resource
 *FindApi* | [**get_file_metadata**](docs/FindApi.md#get_file_metadata) | **GET** /task/find/{externalId}/file/metadata | Find metadata of file by external ID and file type, with header links to original, parent and type resource
 *FindApi* | [**get_latest_file_version_content**](docs/FindApi.md#get_latest_file_version_content) | **GET** /task/find/{externalId}/file/contents | Find contents of latest file version by external ID and file type, with header links to version history, parent and type resource
 *ImportApi* | [**import_document_contents_for_file_with_type**](docs/ImportApi.md#import_document_contents_for_file_with_type) | **POST** /task/import/documents/{externalId}/{typeName} | Import file as the current version for {typeName} of document referenced by {externalId} without indexing
 *IndexApi* | [**index_all**](docs/IndexApi.md#index_all) | **POST** /task/index/files/{type} | Index all files by type
 *IndexApi* | [**index_document**](docs/IndexApi.md#index_document) | **POST** /task/index/document/{externalId}/{type} | Index file of document by externalId and file type
-*IndexApi* | [**index_single_index**](docs/IndexApi.md#index_single_index) | **POST** /task/index/{name} | Index or reindex single index with all relevant files, including those without versions
-*MetadataApi* | [**delete**](docs/MetadataApi.md#delete) | **DELETE** /rest/documents/{docId}/metadata/{key} | Delete document metadata entry
-*MetadataApi* | [**delete2**](docs/MetadataApi.md#delete2) | **DELETE** /rest/files/{fileId}/metadata/{key} | Delete document metadata entry
-*MetadataApi* | [**delete6**](docs/MetadataApi.md#delete6) | **DELETE** /rest/versions/{versionId}/metadata/{key} | Delete document metadata entry
-*MetadataApi* | [**get2**](docs/MetadataApi.md#get2) | **GET** /rest/documents/{docId}/metadata | Retrieve document metadata
-*MetadataApi* | [**get5**](docs/MetadataApi.md#get5) | **GET** /rest/files/{fileId}/metadata | Retrieve file metadata
-*MetadataApi* | [**get9**](docs/MetadataApi.md#get9) | **GET** /rest/versions/{versionId}/metadata | Retrieve version metadata
+*IndexApi* | [**index_single_index**](docs/IndexApi.md#index_single_index) | **POST** /task/index/{name} | Index all files of a single index
+*MetadataApi* | [**delete_document_metadata_entry**](docs/MetadataApi.md#delete_document_metadata_entry) | **DELETE** /rest/documents/{docId}/metadata/{key} | Delete document metadata entry
+*MetadataApi* | [**delete_file_metadata_entry**](docs/MetadataApi.md#delete_file_metadata_entry) | **DELETE** /rest/files/{fileId}/metadata/{key} | Delete file metadata entry
+*MetadataApi* | [**get_document_metadata**](docs/MetadataApi.md#get_document_metadata) | **GET** /rest/documents/{docId}/metadata | Retrieve document metadata
 *MetadataApi* | [**get_documents_given_metadata_key**](docs/MetadataApi.md#get_documents_given_metadata_key) | **GET** /rest/metadata/{key}/documents | Find which documents have a given metadata key
-*MetadataApi* | [**post**](docs/MetadataApi.md#post) | **POST** /rest/documents/{docId}/metadata | Not allowed to post metadata: use put instead
-*MetadataApi* | [**post2**](docs/MetadataApi.md#post2) | **POST** /rest/files/{fileId}/metadata | Not allowed to post metadata: use put instead
-*MetadataApi* | [**post6**](docs/MetadataApi.md#post6) | **POST** /rest/versions/{versionId}/metadata | Not allowed to post metadata: use put instead
-*MetadataApi* | [**put1**](docs/MetadataApi.md#put1) | **PUT** /rest/files/{fileId}/metadata/{key} | Create or update file metadata entry
-*MetadataApi* | [**put5**](docs/MetadataApi.md#put5) | **PUT** /rest/versions/{versionId}/metadata/{key} | Create or update version metadata entry
-*MetadataApi* | [**update**](docs/MetadataApi.md#update) | **PUT** /rest/documents/{docId}/metadata/{key} | Create or update document metadata entry
+*MetadataApi* | [**get_file_metadata**](docs/MetadataApi.md#get_file_metadata) | **GET** /rest/files/{fileId}/metadata | Retrieve file metadata
+*MetadataApi* | [**post_document_metadata_is_not_allowed**](docs/MetadataApi.md#post_document_metadata_is_not_allowed) | **POST** /rest/documents/{docId}/metadata | Not allowed to post metadata: use put instead
+*MetadataApi* | [**post_metadata_is_not_allowed**](docs/MetadataApi.md#post_metadata_is_not_allowed) | **POST** /rest/files/{fileId}/metadata | Not allowed to post metadata: use put instead
+*MetadataApi* | [**put_document_metadata_entry**](docs/MetadataApi.md#put_document_metadata_entry) | **PUT** /rest/documents/{docId}/metadata/{key} | Create or update document metadata entry
+*MetadataApi* | [**put_file_metadata_entry**](docs/MetadataApi.md#put_file_metadata_entry) | **PUT** /rest/files/{fileId}/metadata/{key} | Create or update file metadata entry
 *RegisterApi* | [**post_identifiers**](docs/RegisterApi.md#post_identifiers) | **POST** /task/register | 
 *RegisterApi* | [**put_identifiers**](docs/RegisterApi.md#put_identifiers) | **PUT** /task/register | 
-*TaskApi* | [**delete_document**](docs/TaskApi.md#delete_document) | **DELETE** /task/delete/documents/{externalId} | Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.
+*TaskApi* | [**delete_document_recursively**](docs/TaskApi.md#delete_document_recursively) | **DELETE** /task/delete/documents/{externalId} | Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.
 *TaskApi* | [**get_document_metadata**](docs/TaskApi.md#get_document_metadata) | **GET** /task/find/{externalId}/document/metadata | Find metadata of document by external ID, with header links to original and parent resource
 *TaskApi* | [**get_file_metadata**](docs/TaskApi.md#get_file_metadata) | **GET** /task/find/{externalId}/file/metadata | Find metadata of file by external ID and file type, with header links to original, parent and type resource
 *TaskApi* | [**get_latest_file_version_content**](docs/TaskApi.md#get_latest_file_version_content) | **GET** /task/find/{externalId}/file/contents | Find contents of latest file version by external ID and file type, with header links to version history, parent and type resource
 *TaskApi* | [**import_document_contents_for_file_with_type**](docs/TaskApi.md#import_document_contents_for_file_with_type) | **POST** /task/import/documents/{externalId}/{typeName} | Import file as the current version for {typeName} of document referenced by {externalId} without indexing
 *TaskApi* | [**index_all**](docs/TaskApi.md#index_all) | **POST** /task/index/files/{type} | Index all files by type
 *TaskApi* | [**index_document**](docs/TaskApi.md#index_document) | **POST** /task/index/document/{externalId}/{type} | Index file of document by externalId and file type
-*TaskApi* | [**index_single_index**](docs/TaskApi.md#index_single_index) | **POST** /task/index/{name} | Index or reindex single index with all relevant files, including those without versions
+*TaskApi* | [**index_single_index**](docs/TaskApi.md#index_single_index) | **POST** /task/index/{name} | Index all files of a single index
 *TaskApi* | [**post_identifiers**](docs/TaskApi.md#post_identifiers) | **POST** /task/register | 
 *TaskApi* | [**put_identifiers**](docs/TaskApi.md#put_identifiers) | **PUT** /task/register | 
-*TypesApi* | [**delete4**](docs/TypesApi.md#delete4) | **DELETE** /rest/types/{id} | Delete type
-*TypesApi* | [**get7**](docs/TypesApi.md#get7) | **GET** /rest/types/{id} | Retrieve types
-*TypesApi* | [**get_all**](docs/TypesApi.md#get_all) | **GET** /rest/types | Retrieve types
-*TypesApi* | [**post4**](docs/TypesApi.md#post4) | **POST** /rest/types | Create type
-*TypesApi* | [**put3**](docs/TypesApi.md#put3) | **PUT** /rest/types/{id} | Create or update type
-*VersionsApi* | [**delete5**](docs/VersionsApi.md#delete5) | **DELETE** /rest/versions/{versionId}/contents | Not allowed to delete contents of version: delete version instead
-*VersionsApi* | [**delete6**](docs/VersionsApi.md#delete6) | **DELETE** /rest/versions/{versionId}/metadata/{key} | Delete document metadata entry
-*VersionsApi* | [**delete7**](docs/VersionsApi.md#delete7) | **DELETE** /rest/versions/{id} | Delete version
-*VersionsApi* | [**get10**](docs/VersionsApi.md#get10) | **GET** /rest/versions/{id} | Retrieve version
-*VersionsApi* | [**get8**](docs/VersionsApi.md#get8) | **GET** /rest/versions/{versionId}/contents | Retrieve version contents
-*VersionsApi* | [**get9**](docs/VersionsApi.md#get9) | **GET** /rest/versions/{versionId}/metadata | Retrieve version metadata
+*TypesApi* | [**create_type**](docs/TypesApi.md#create_type) | **POST** /rest/types | Create type
+*TypesApi* | [**delete_type**](docs/TypesApi.md#delete_type) | **DELETE** /rest/types/{id} | Delete type
+*TypesApi* | [**get_type**](docs/TypesApi.md#get_type) | **GET** /rest/types/{id} | Retrieve types
+*TypesApi* | [**get_types**](docs/TypesApi.md#get_types) | **GET** /rest/types | Retrieve types
+*TypesApi* | [**put_type**](docs/TypesApi.md#put_type) | **PUT** /rest/types/{id} | Create or update type
+*VersionsApi* | [**create_version**](docs/VersionsApi.md#create_version) | **POST** /rest/versions | Create version
+*VersionsApi* | [**delete_version**](docs/VersionsApi.md#delete_version) | **DELETE** /rest/versions/{id} | Delete version
+*VersionsApi* | [**delete_version_contents_is_not_allowed**](docs/VersionsApi.md#delete_version_contents_is_not_allowed) | **DELETE** /rest/versions/{versionId}/contents | Not allowed to delete contents of version: delete version instead
+*VersionsApi* | [**get_version**](docs/VersionsApi.md#get_version) | **GET** /rest/versions/{id} | Retrieve version
+*VersionsApi* | [**get_version_contents**](docs/VersionsApi.md#get_version_contents) | **GET** /rest/versions/{versionId}/contents | Retrieve version contents
 *VersionsApi* | [**get_versions**](docs/VersionsApi.md#get_versions) | **GET** /rest/files/{fileId}/versions | Retrieve file versions, newest first
-*VersionsApi* | [**post5**](docs/VersionsApi.md#post5) | **POST** /rest/versions/{versionId}/contents | Not allowed to post contents: post new version instead
-*VersionsApi* | [**post6**](docs/VersionsApi.md#post6) | **POST** /rest/versions/{versionId}/metadata | Not allowed to post metadata: use put instead
-*VersionsApi* | [**post7**](docs/VersionsApi.md#post7) | **POST** /rest/versions | Create version
-*VersionsApi* | [**put4**](docs/VersionsApi.md#put4) | **PUT** /rest/versions/{versionId}/contents | Not allowed to put contents of version: post new version instead
-*VersionsApi* | [**put5**](docs/VersionsApi.md#put5) | **PUT** /rest/versions/{versionId}/metadata/{key} | Create or update version metadata entry
-*VersionsApi* | [**put6**](docs/VersionsApi.md#put6) | **PUT** /rest/versions/{id} | Not allowed to update a version: create a new version using POST
+*VersionsApi* | [**post_version_contents_is_not_allowed**](docs/VersionsApi.md#post_version_contents_is_not_allowed) | **POST** /rest/versions/{versionId}/contents | Not allowed to post contents: post new version instead
+*VersionsApi* | [**put_version_contents_is_not_allowed**](docs/VersionsApi.md#put_version_contents_is_not_allowed) | **PUT** /rest/versions/{versionId}/contents | Not allowed to put contents of version: post new version instead
+*VersionsApi* | [**put_version_is_not_allowed**](docs/VersionsApi.md#put_version_is_not_allowed) | **PUT** /rest/versions/{id} | Not allowed to update a version: create a new version using POST
 
 ## Documentation For Models
 
@@ -159,12 +189,8 @@ Class | Method | HTTP request | Description
  - [FormType](docs/FormType.md)
  - [FormVersion](docs/FormVersion.md)
  - [InputStream](docs/InputStream.md)
- - [ResultAbout](docs/ResultAbout.md)
- - [ResultAboutVersion](docs/ResultAboutVersion.md)
  - [ResultDocument](docs/ResultDocument.md)
  - [ResultDocumentsOverview](docs/ResultDocumentsOverview.md)
- - [ResultIndexer](docs/ResultIndexer.md)
- - [ResultIndexerFieldsConfiguration](docs/ResultIndexerFieldsConfiguration.md)
  - [ResultPage](docs/ResultPage.md)
  - [ResultPageParams](docs/ResultPageParams.md)
  - [ResultPageResultDocument](docs/ResultPageResultDocument.md)

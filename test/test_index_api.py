@@ -44,7 +44,7 @@ class TestIndexApi(unittest.TestCase):
     def test_index_single_index(self):
         """Test case for index_single_index
 
-        Index or reindex single index with all relevant files, including those without versions  # noqa: E501
+        Index all files of a single index  # noqa: E501
         """
         pass
 
