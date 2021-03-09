@@ -1,6 +1,6 @@
 # textrepo_client.VersionsApi
 
-All URIs are relative to */api*
+All URIs are relative to *http://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,38 +14,51 @@ Method | HTTP request | Description
 [**put_version_contents_is_not_allowed**](VersionsApi.md#put_version_contents_is_not_allowed) | **PUT** /rest/versions/{versionId}/contents | Not allowed to put contents of version: post new version instead
 [**put_version_is_not_allowed**](VersionsApi.md#put_version_is_not_allowed) | **PUT** /rest/versions/{id} | Not allowed to update a version: create a new version using POST
 
+
 # **create_version**
-> ResultVersion create_version(file_id=file_id, contents=contents)
+> ResultVersion create_version()
 
 Create version
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import versions_api
+from textrepo_client.model.result_version import ResultVersion
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.VersionsApi()
-file_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str |  (optional)
-contents = 'contents_example' # str |  (optional)
 
-try:
-    # Create version
-    api_response = api_instance.create_version(file_id=file_id, contents=contents)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling VersionsApi->create_version: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = versions_api.VersionsApi(api_client)
+    file_id = "file_id_example" # str |  (optional)
+    contents = open('/path/to/file', 'rb') # file_type |  (optional)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Create version
+        api_response = api_instance.create_version(file_id=file_id, contents=contents)
+        pprint(api_response)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling VersionsApi->create_version: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | [**str**](.md)|  | [optional] 
- **contents** | **str**|  | [optional] 
+ **file_id** | **str**|  | [optional]
+ **contents** | **file_type**|  | [optional]
 
 ### Return type
 
@@ -60,6 +73,12 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_version**
@@ -68,29 +87,39 @@ No authorization required
 Delete version
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import versions_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.VersionsApi()
-id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
 
-try:
-    # Delete version
-    api_instance.delete_version(id)
-except ApiException as e:
-    print("Exception when calling VersionsApi->delete_version: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = versions_api.VersionsApi(api_client)
+    id = "id_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete version
+        api_instance.delete_version(id)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling VersionsApi->delete_version: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**str**](.md)|  | 
+ **id** | **str**|  |
 
 ### Return type
 
@@ -104,6 +133,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -113,22 +148,32 @@ No authorization required
 Not allowed to delete contents of version: delete version instead
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import versions_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.VersionsApi()
 
-try:
-    # Not allowed to delete contents of version: delete version instead
-    api_instance.delete_version_contents_is_not_allowed()
-except ApiException as e:
-    print("Exception when calling VersionsApi->delete_version_contents_is_not_allowed: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = versions_api.VersionsApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # Not allowed to delete contents of version: delete version instead
+        api_instance.delete_version_contents_is_not_allowed()
+    except textrepo_client.ApiException as e:
+        print("Exception when calling VersionsApi->delete_version_contents_is_not_allowed: %s\n" % e)
 ```
+
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -145,6 +190,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**405** | Not allowed to delete contents of version: delete version instead |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -154,30 +205,41 @@ No authorization required
 Retrieve version
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import versions_api
+from textrepo_client.model.result_version import ResultVersion
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.VersionsApi()
-id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
 
-try:
-    # Retrieve version
-    api_response = api_instance.get_version(id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling VersionsApi->get_version: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = versions_api.VersionsApi(api_client)
+    id = "id_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Retrieve version
+        api_response = api_instance.get_version(id)
+        pprint(api_response)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling VersionsApi->get_version: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**str**](.md)|  | 
+ **id** | **str**|  |
 
 ### Return type
 
@@ -191,6 +253,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -200,30 +268,41 @@ No authorization required
 Retrieve version contents
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import versions_api
+from textrepo_client.model.result_version import ResultVersion
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.VersionsApi()
-version_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
 
-try:
-    # Retrieve version contents
-    api_response = api_instance.get_version_contents(version_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling VersionsApi->get_version_contents: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = versions_api.VersionsApi(api_client)
+    version_id = "versionId_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Retrieve version contents
+        api_response = api_instance.get_version_contents(version_id)
+        pprint(api_response)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling VersionsApi->get_version_contents: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **version_id** | [**str**](.md)|  | 
+ **version_id** | **str**|  |
 
 ### Return type
 
@@ -237,45 +316,71 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_versions**
-> ResultVersion get_versions(file_id, limit=limit, offset=offset, created_after=created_after)
+> ResultVersion get_versions(file_id)
 
 Retrieve file versions, newest first
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import versions_api
+from textrepo_client.model.result_version import ResultVersion
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.VersionsApi()
-file_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
-limit = 56 # int |  (optional)
-offset = 56 # int |  (optional)
-created_after = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
 
-try:
-    # Retrieve file versions, newest first
-    api_response = api_instance.get_versions(file_id, limit=limit, offset=offset, created_after=created_after)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling VersionsApi->get_versions: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = versions_api.VersionsApi(api_client)
+    file_id = "fileId_example" # str | 
+    limit = 1 # int |  (optional)
+    offset = 1 # int |  (optional)
+    created_after = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime |  (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Retrieve file versions, newest first
+        api_response = api_instance.get_versions(file_id)
+        pprint(api_response)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling VersionsApi->get_versions: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Retrieve file versions, newest first
+        api_response = api_instance.get_versions(file_id, limit=limit, offset=offset, created_after=created_after)
+        pprint(api_response)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling VersionsApi->get_versions: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | [**str**](.md)|  | 
- **limit** | **int**|  | [optional] 
- **offset** | **int**|  | [optional] 
- **created_after** | **datetime**|  | [optional] 
+ **file_id** | **str**|  |
+ **limit** | **int**|  | [optional]
+ **offset** | **int**|  | [optional]
+ **created_after** | **datetime**|  | [optional]
 
 ### Return type
 
@@ -289,6 +394,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -298,22 +409,32 @@ No authorization required
 Not allowed to post contents: post new version instead
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import versions_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.VersionsApi()
 
-try:
-    # Not allowed to post contents: post new version instead
-    api_instance.post_version_contents_is_not_allowed()
-except ApiException as e:
-    print("Exception when calling VersionsApi->post_version_contents_is_not_allowed: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = versions_api.VersionsApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # Not allowed to post contents: post new version instead
+        api_instance.post_version_contents_is_not_allowed()
+    except textrepo_client.ApiException as e:
+        print("Exception when calling VersionsApi->post_version_contents_is_not_allowed: %s\n" % e)
 ```
+
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -330,6 +451,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**405** | Not allowed to post contents: post new version instead |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -339,22 +466,32 @@ No authorization required
 Not allowed to put contents of version: post new version instead
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import versions_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.VersionsApi()
 
-try:
-    # Not allowed to put contents of version: post new version instead
-    api_instance.put_version_contents_is_not_allowed()
-except ApiException as e:
-    print("Exception when calling VersionsApi->put_version_contents_is_not_allowed: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = versions_api.VersionsApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # Not allowed to put contents of version: post new version instead
+        api_instance.put_version_contents_is_not_allowed()
+    except textrepo_client.ApiException as e:
+        print("Exception when calling VersionsApi->put_version_contents_is_not_allowed: %s\n" % e)
 ```
+
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -372,39 +509,66 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**405** | Not allowed to put contents of version: post new version instead |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_version_is_not_allowed**
-> put_version_is_not_allowed(id, body=body)
+> put_version_is_not_allowed(id)
 
 Not allowed to update a version: create a new version using POST
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import versions_api
+from textrepo_client.model.form_version import FormVersion
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.VersionsApi()
-id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
-body = textrepo_client.FormVersion() # FormVersion |  (optional)
 
-try:
-    # Not allowed to update a version: create a new version using POST
-    api_instance.put_version_is_not_allowed(id, body=body)
-except ApiException as e:
-    print("Exception when calling VersionsApi->put_version_is_not_allowed: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = versions_api.VersionsApi(api_client)
+    id = "id_example" # str | 
+    body = FormVersion(
+        external_id="external_id_example",
+    ) # FormVersion |  (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Not allowed to update a version: create a new version using POST
+        api_instance.put_version_is_not_allowed(id)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling VersionsApi->put_version_is_not_allowed: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Not allowed to update a version: create a new version using POST
+        api_instance.put_version_is_not_allowed(id, body=body)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling VersionsApi->put_version_is_not_allowed: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**str**](.md)|  | 
- **body** | [**FormVersion**](FormVersion.md)|  | [optional] 
+ **id** | **str**|  |
+ **body** | [**FormVersion**](FormVersion.md)|  | [optional]
 
 ### Return type
 
@@ -418,6 +582,12 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**405** | Not allowed to update a version: create a new version using POST |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

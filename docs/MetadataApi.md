@@ -1,6 +1,6 @@
 # textrepo_client.MetadataApi
 
-All URIs are relative to */api*
+All URIs are relative to *http://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,37 +14,48 @@ Method | HTTP request | Description
 [**put_document_metadata_entry**](MetadataApi.md#put_document_metadata_entry) | **PUT** /rest/documents/{docId}/metadata/{key} | Create or update document metadata entry
 [**put_file_metadata_entry**](MetadataApi.md#put_file_metadata_entry) | **PUT** /rest/files/{fileId}/metadata/{key} | Create or update file metadata entry
 
+
 # **delete_document_metadata_entry**
 > delete_document_metadata_entry(doc_id, key)
 
 Delete document metadata entry
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import metadata_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.MetadataApi()
-doc_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
-key = 'key_example' # str | 
 
-try:
-    # Delete document metadata entry
-    api_instance.delete_document_metadata_entry(doc_id, key)
-except ApiException as e:
-    print("Exception when calling MetadataApi->delete_document_metadata_entry: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = metadata_api.MetadataApi(api_client)
+    doc_id = "docId_example" # str | 
+    key = "key_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete document metadata entry
+        api_instance.delete_document_metadata_entry(doc_id, key)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling MetadataApi->delete_document_metadata_entry: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **doc_id** | [**str**](.md)|  | 
- **key** | **str**|  | 
+ **doc_id** | **str**|  |
+ **key** | **str**|  |
 
 ### Return type
 
@@ -58,6 +69,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -67,31 +84,41 @@ No authorization required
 Delete file metadata entry
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import metadata_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.MetadataApi()
-file_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
-key = 'key_example' # str | 
 
-try:
-    # Delete file metadata entry
-    api_instance.delete_file_metadata_entry(file_id, key)
-except ApiException as e:
-    print("Exception when calling MetadataApi->delete_file_metadata_entry: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = metadata_api.MetadataApi(api_client)
+    file_id = "fileId_example" # str | 
+    key = "key_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete file metadata entry
+        api_instance.delete_file_metadata_entry(file_id, key)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling MetadataApi->delete_file_metadata_entry: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | [**str**](.md)|  | 
- **key** | **str**|  | 
+ **file_id** | **str**|  |
+ **key** | **str**|  |
 
 ### Return type
 
@@ -106,42 +133,58 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_document_metadata**
-> dict(str, str) get_document_metadata(doc_id)
+> {str: (str,)} get_document_metadata(doc_id)
 
 Retrieve document metadata
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import metadata_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.MetadataApi()
-doc_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
 
-try:
-    # Retrieve document metadata
-    api_response = api_instance.get_document_metadata(doc_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling MetadataApi->get_document_metadata: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = metadata_api.MetadataApi(api_client)
+    doc_id = "docId_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Retrieve document metadata
+        api_response = api_instance.get_document_metadata(doc_id)
+        pprint(api_response)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling MetadataApi->get_document_metadata: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **doc_id** | [**str**](.md)|  | 
+ **doc_id** | **str**|  |
 
 ### Return type
 
-**dict(str, str)**
+**{str: (str,)}**
 
 ### Authorization
 
@@ -151,43 +194,59 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_documents_given_metadata_key**
-> list[str] get_documents_given_metadata_key(key)
+> [str] get_documents_given_metadata_key(key)
 
 Find which documents have a given metadata key
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import metadata_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.MetadataApi()
-key = 'key_example' # str | 
 
-try:
-    # Find which documents have a given metadata key
-    api_response = api_instance.get_documents_given_metadata_key(key)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling MetadataApi->get_documents_given_metadata_key: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = metadata_api.MetadataApi(api_client)
+    key = "key_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Find which documents have a given metadata key
+        api_response = api_instance.get_documents_given_metadata_key(key)
+        pprint(api_response)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling MetadataApi->get_documents_given_metadata_key: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **key** | **str**|  | 
+ **key** | **str**|  |
 
 ### Return type
 
-**list[str]**
+**[str]**
 
 ### Authorization
 
@@ -197,43 +256,59 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_file_metadata**
-> dict(str, str) get_file_metadata(file_id)
+> {str: (str,)} get_file_metadata(file_id)
 
 Retrieve file metadata
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import metadata_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.MetadataApi()
-file_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
 
-try:
-    # Retrieve file metadata
-    api_response = api_instance.get_file_metadata(file_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling MetadataApi->get_file_metadata: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = metadata_api.MetadataApi(api_client)
+    file_id = "fileId_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Retrieve file metadata
+        api_response = api_instance.get_file_metadata(file_id)
+        pprint(api_response)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling MetadataApi->get_file_metadata: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | [**str**](.md)|  | 
+ **file_id** | **str**|  |
 
 ### Return type
 
-**dict(str, str)**
+**{str: (str,)}**
 
 ### Authorization
 
@@ -243,6 +318,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -252,22 +333,32 @@ No authorization required
 Not allowed to post metadata: use put instead
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import metadata_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.MetadataApi()
 
-try:
-    # Not allowed to post metadata: use put instead
-    api_instance.post_document_metadata_is_not_allowed()
-except ApiException as e:
-    print("Exception when calling MetadataApi->post_document_metadata_is_not_allowed: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = metadata_api.MetadataApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # Not allowed to post metadata: use put instead
+        api_instance.post_document_metadata_is_not_allowed()
+    except textrepo_client.ApiException as e:
+        print("Exception when calling MetadataApi->post_document_metadata_is_not_allowed: %s\n" % e)
 ```
+
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -284,6 +375,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**405** | Not allowed to post metadata: use put instead |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -293,22 +390,32 @@ No authorization required
 Not allowed to post metadata: use put instead
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import metadata_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.MetadataApi()
 
-try:
-    # Not allowed to post metadata: use put instead
-    api_instance.post_metadata_is_not_allowed()
-except ApiException as e:
-    print("Exception when calling MetadataApi->post_metadata_is_not_allowed: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = metadata_api.MetadataApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # Not allowed to post metadata: use put instead
+        api_instance.post_metadata_is_not_allowed()
+    except textrepo_client.ApiException as e:
+        print("Exception when calling MetadataApi->post_metadata_is_not_allowed: %s\n" % e)
 ```
+
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -326,41 +433,65 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**405** | Not allowed to post metadata: use put instead |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_document_metadata_entry**
-> put_document_metadata_entry(doc_id, key, body=body)
+> put_document_metadata_entry(doc_id, key)
 
 Create or update document metadata entry
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import metadata_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.MetadataApi()
-doc_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
-key = 'key_example' # str | 
-body = 'body_example' # str |  (optional)
 
-try:
-    # Create or update document metadata entry
-    api_instance.put_document_metadata_entry(doc_id, key, body=body)
-except ApiException as e:
-    print("Exception when calling MetadataApi->put_document_metadata_entry: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = metadata_api.MetadataApi(api_client)
+    doc_id = "docId_example" # str | 
+    key = "key_example" # str | 
+    body = "body_example" # str |  (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Create or update document metadata entry
+        api_instance.put_document_metadata_entry(doc_id, key)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling MetadataApi->put_document_metadata_entry: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Create or update document metadata entry
+        api_instance.put_document_metadata_entry(doc_id, key, body=body)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling MetadataApi->put_document_metadata_entry: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **doc_id** | [**str**](.md)|  | 
- **key** | **str**|  | 
- **body** | [**str**](str.md)|  | [optional] 
+ **doc_id** | **str**|  |
+ **key** | **str**|  |
+ **body** | **str**|  | [optional]
 
 ### Return type
 
@@ -374,42 +505,66 @@ No authorization required
 
  - **Content-Type**: text/plain
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_file_metadata_entry**
-> put_file_metadata_entry(file_id, key, body=body)
+> put_file_metadata_entry(file_id, key)
 
 Create or update file metadata entry
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import metadata_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.MetadataApi()
-file_id = '38400000-8cf0-11bd-b23e-10b96e4ef00d' # str | 
-key = 'key_example' # str | 
-body = 'body_example' # str |  (optional)
 
-try:
-    # Create or update file metadata entry
-    api_instance.put_file_metadata_entry(file_id, key, body=body)
-except ApiException as e:
-    print("Exception when calling MetadataApi->put_file_metadata_entry: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = metadata_api.MetadataApi(api_client)
+    file_id = "fileId_example" # str | 
+    key = "key_example" # str | 
+    body = "body_example" # str |  (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Create or update file metadata entry
+        api_instance.put_file_metadata_entry(file_id, key)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling MetadataApi->put_file_metadata_entry: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Create or update file metadata entry
+        api_instance.put_file_metadata_entry(file_id, key, body=body)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling MetadataApi->put_file_metadata_entry: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file_id** | [**str**](.md)|  | 
- **key** | **str**|  | 
- **body** | [**str**](str.md)|  | [optional] 
+ **file_id** | **str**|  |
+ **key** | **str**|  |
+ **body** | **str**|  | [optional]
 
 ### Return type
 
@@ -423,6 +578,12 @@ No authorization required
 
  - **Content-Type**: text/plain
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

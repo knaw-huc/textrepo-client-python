@@ -1,6 +1,6 @@
 # textrepo_client.TypesApi
 
-All URIs are relative to */api*
+All URIs are relative to *http://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,35 +10,51 @@ Method | HTTP request | Description
 [**get_types**](TypesApi.md#get_types) | **GET** /rest/types | Retrieve types
 [**put_type**](TypesApi.md#put_type) | **PUT** /rest/types/{id} | Create or update type
 
+
 # **create_type**
-> create_type(body=body)
+> create_type()
 
 Create type
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import types_api
+from textrepo_client.model.form_type import FormType
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TypesApi()
-body = textrepo_client.FormType() # FormType |  (optional)
 
-try:
-    # Create type
-    api_instance.create_type(body=body)
-except ApiException as e:
-    print("Exception when calling TypesApi->create_type: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = types_api.TypesApi(api_client)
+    body = FormType(
+        name="name_example",
+        mimetype="mimetype_example",
+    ) # FormType |  (optional)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Create type
+        api_instance.create_type(body=body)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TypesApi->create_type: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**FormType**](FormType.md)|  | [optional] 
+ **body** | [**FormType**](FormType.md)|  | [optional]
 
 ### Return type
 
@@ -53,6 +69,12 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: Not defined
 
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_type**
@@ -61,29 +83,39 @@ No authorization required
 Delete type
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import types_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TypesApi()
-id = 56 # int | 
 
-try:
-    # Delete type
-    api_instance.delete_type(id)
-except ApiException as e:
-    print("Exception when calling TypesApi->delete_type: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = types_api.TypesApi(api_client)
+    id = 1 # int | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete type
+        api_instance.delete_type(id)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TypesApi->delete_type: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **int**|  |
 
 ### Return type
 
@@ -97,6 +129,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -106,29 +144,39 @@ No authorization required
 Retrieve types
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import types_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TypesApi()
-id = 56 # int | 
 
-try:
-    # Retrieve types
-    api_instance.get_type(id)
-except ApiException as e:
-    print("Exception when calling TypesApi->get_type: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = types_api.TypesApi(api_client)
+    id = 1 # int | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Retrieve types
+        api_instance.get_type(id)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TypesApi->get_type: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
+ **id** | **int**|  |
 
 ### Return type
 
@@ -143,6 +191,12 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_types**
@@ -151,22 +205,32 @@ No authorization required
 Retrieve types
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import types_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TypesApi()
 
-try:
-    # Retrieve types
-    api_instance.get_types()
-except ApiException as e:
-    print("Exception when calling TypesApi->get_types: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = types_api.TypesApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # Retrieve types
+        api_instance.get_types()
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TypesApi->get_types: %s\n" % e)
 ```
+
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -184,39 +248,67 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_type**
-> put_type(id, body=body)
+> put_type(id)
 
 Create or update type
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import types_api
+from textrepo_client.model.form_type import FormType
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TypesApi()
-id = 56 # int | 
-body = textrepo_client.FormType() # FormType |  (optional)
 
-try:
-    # Create or update type
-    api_instance.put_type(id, body=body)
-except ApiException as e:
-    print("Exception when calling TypesApi->put_type: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = types_api.TypesApi(api_client)
+    id = 1 # int | 
+    body = FormType(
+        name="name_example",
+        mimetype="mimetype_example",
+    ) # FormType |  (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Create or update type
+        api_instance.put_type(id)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TypesApi->put_type: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Create or update type
+        api_instance.put_type(id, body=body)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TypesApi->put_type: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **int**|  | 
- **body** | [**FormType**](FormType.md)|  | [optional] 
+ **id** | **int**|  |
+ **body** | [**FormType**](FormType.md)|  | [optional]
 
 ### Return type
 
@@ -230,6 +322,12 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,6 +1,6 @@
 # textrepo_client.IndexApi
 
-All URIs are relative to */api*
+All URIs are relative to *http://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,35 +8,46 @@ Method | HTTP request | Description
 [**index_document**](IndexApi.md#index_document) | **POST** /task/index/document/{externalId}/{type} | Index file of document by externalId and file type
 [**index_single_index**](IndexApi.md#index_single_index) | **POST** /task/index/{name} | Index all files of a single index
 
+
 # **index_all**
 > index_all(type)
 
 Index all files by type
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import index_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.IndexApi()
-type = 'type_example' # str | 
 
-try:
-    # Index all files by type
-    api_instance.index_all(type)
-except ApiException as e:
-    print("Exception when calling IndexApi->index_all: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = index_api.IndexApi(api_client)
+    type = "type_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Index all files by type
+        api_instance.index_all(type)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling IndexApi->index_all: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **type** | **str**|  | 
+ **type** | **str**|  |
 
 ### Return type
 
@@ -50,6 +61,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -59,31 +76,41 @@ No authorization required
 Index file of document by externalId and file type
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import index_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.IndexApi()
-external_id = 'external_id_example' # str | 
-type = 'type_example' # str | 
 
-try:
-    # Index file of document by externalId and file type
-    api_instance.index_document(external_id, type)
-except ApiException as e:
-    print("Exception when calling IndexApi->index_document: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = index_api.IndexApi(api_client)
+    external_id = "externalId_example" # str | 
+    type = "type_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Index file of document by externalId and file type
+        api_instance.index_document(external_id, type)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling IndexApi->index_document: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **external_id** | **str**|  | 
- **type** | **str**|  | 
+ **external_id** | **str**|  |
+ **type** | **str**|  |
 
 ### Return type
 
@@ -97,6 +124,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -106,29 +139,39 @@ No authorization required
 Index all files of a single index
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import index_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.IndexApi()
-name = 'name_example' # str | 
 
-try:
-    # Index all files of a single index
-    api_instance.index_single_index(name)
-except ApiException as e:
-    print("Exception when calling IndexApi->index_single_index: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = index_api.IndexApi(api_client)
+    name = "name_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Index all files of a single index
+        api_instance.index_single_index(name)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling IndexApi->index_single_index: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**|  | 
+ **name** | **str**|  |
 
 ### Return type
 
@@ -142,6 +185,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

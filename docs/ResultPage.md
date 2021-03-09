@@ -1,11 +1,13 @@
 # ResultPage
 
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | **list[object]** |  | [optional] 
-**total** | **int** |  | [optional] 
+**items** | **[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]** |  | [optional] [readonly] 
+**total** | **int** |  | [optional] [readonly] 
 **page** | [**ResultPageParams**](ResultPageParams.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 

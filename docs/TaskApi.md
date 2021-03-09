@@ -1,6 +1,6 @@
 # textrepo_client.TaskApi
 
-All URIs are relative to */api*
+All URIs are relative to *http://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -15,35 +15,46 @@ Method | HTTP request | Description
 [**post_identifiers**](TaskApi.md#post_identifiers) | **POST** /task/register | 
 [**put_identifiers**](TaskApi.md#put_identifiers) | **PUT** /task/register | 
 
+
 # **delete_document_recursively**
 > delete_document_recursively(external_id)
 
 Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import task_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TaskApi()
-external_id = 'external_id_example' # str | 
 
-try:
-    # Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.
-    api_instance.delete_document_recursively(external_id)
-except ApiException as e:
-    print("Exception when calling TaskApi->delete_document_recursively: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = task_api.TaskApi(api_client)
+    external_id = "externalId_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.
+        api_instance.delete_document_recursively(external_id)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TaskApi->delete_document_recursively: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **external_id** | **str**|  | 
+ **external_id** | **str**|  |
 
 ### Return type
 
@@ -57,6 +68,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -66,29 +83,39 @@ No authorization required
 Find metadata of document by external ID, with header links to original and parent resource
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import task_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TaskApi()
-external_id = 'external_id_example' # str | 
 
-try:
-    # Find metadata of document by external ID, with header links to original and parent resource
-    api_instance.get_document_metadata(external_id)
-except ApiException as e:
-    print("Exception when calling TaskApi->get_document_metadata: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = task_api.TaskApi(api_client)
+    external_id = "externalId_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Find metadata of document by external ID, with header links to original and parent resource
+        api_instance.get_document_metadata(external_id)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TaskApi->get_document_metadata: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **external_id** | **str**|  | 
+ **external_id** | **str**|  |
 
 ### Return type
 
@@ -102,6 +129,13 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**404** | Given document could not be found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -111,31 +145,41 @@ No authorization required
 Find metadata of file by external ID and file type, with header links to original, parent and type resource
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import task_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TaskApi()
-external_id = 'external_id_example' # str | 
-type = 'type_example' # str | 
 
-try:
-    # Find metadata of file by external ID and file type, with header links to original, parent and type resource
-    api_instance.get_file_metadata(external_id, type)
-except ApiException as e:
-    print("Exception when calling TaskApi->get_file_metadata: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = task_api.TaskApi(api_client)
+    external_id = "externalId_example" # str | 
+    type = "type_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Find metadata of file by external ID and file type, with header links to original, parent and type resource
+        api_instance.get_file_metadata(external_id, type)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TaskApi->get_file_metadata: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **external_id** | **str**|  | 
- **type** | **str**|  | 
+ **external_id** | **str**|  |
+ **type** | **str**|  |
 
 ### Return type
 
@@ -149,6 +193,13 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**404** | Given file could not be found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -158,31 +209,41 @@ No authorization required
 Find contents of latest file version by external ID and file type, with header links to version history, parent and type resource
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import task_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TaskApi()
-external_id = 'external_id_example' # str | 
-type = 'type_example' # str | 
 
-try:
-    # Find contents of latest file version by external ID and file type, with header links to version history, parent and type resource
-    api_instance.get_latest_file_version_content(external_id, type)
-except ApiException as e:
-    print("Exception when calling TaskApi->get_latest_file_version_content: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = task_api.TaskApi(api_client)
+    external_id = "externalId_example" # str | 
+    type = "type_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Find contents of latest file version by external ID and file type, with header links to version history, parent and type resource
+        api_instance.get_latest_file_version_content(external_id, type)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TaskApi->get_latest_file_version_content: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **external_id** | **str**|  | 
- **type** | **str**|  | 
+ **external_id** | **str**|  |
+ **type** | **str**|  |
 
 ### Return type
 
@@ -197,43 +258,68 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | OK |  -  |
+**404** | Given type, document or supposed contents could not be found |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **import_document_contents_for_file_with_type**
-> import_document_contents_for_file_with_type(contents, external_id, type_name, allow_new_document=allow_new_document)
+> import_document_contents_for_file_with_type(external_id, type_name, contents)
 
 Import file as the current version for {typeName} of document referenced by {externalId} without indexing
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import task_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TaskApi()
-contents = 'contents_example' # str | 
-external_id = 'external_id_example' # str | 
-type_name = 'type_name_example' # str | 
-allow_new_document = false # bool |  (optional) (default to false)
 
-try:
-    # Import file as the current version for {typeName} of document referenced by {externalId} without indexing
-    api_instance.import_document_contents_for_file_with_type(contents, external_id, type_name, allow_new_document=allow_new_document)
-except ApiException as e:
-    print("Exception when calling TaskApi->import_document_contents_for_file_with_type: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = task_api.TaskApi(api_client)
+    external_id = "externalId_example" # str | 
+    type_name = "typeName_example" # str | 
+    contents = open('/path/to/file', 'rb') # file_type | 
+    allow_new_document = False # bool |  (optional) if omitted the server will use the default value of False
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Import file as the current version for {typeName} of document referenced by {externalId} without indexing
+        api_instance.import_document_contents_for_file_with_type(external_id, type_name, contents)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TaskApi->import_document_contents_for_file_with_type: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Import file as the current version for {typeName} of document referenced by {externalId} without indexing
+        api_instance.import_document_contents_for_file_with_type(external_id, type_name, contents, allow_new_document=allow_new_document)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TaskApi->import_document_contents_for_file_with_type: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contents** | **str**|  | 
- **external_id** | **str**|  | 
- **type_name** | **str**|  | 
- **allow_new_document** | **bool**|  | [optional] [default to false]
+ **external_id** | **str**|  |
+ **type_name** | **str**|  |
+ **contents** | **file_type**|  |
+ **allow_new_document** | **bool**|  | [optional] if omitted the server will use the default value of False
 
 ### Return type
 
@@ -248,6 +334,12 @@ No authorization required
  - **Content-Type**: multipart/form-data
  - **Accept**: Not defined
 
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | CREATED |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **index_all**
@@ -256,29 +348,39 @@ No authorization required
 Index all files by type
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import task_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TaskApi()
-type = 'type_example' # str | 
 
-try:
-    # Index all files by type
-    api_instance.index_all(type)
-except ApiException as e:
-    print("Exception when calling TaskApi->index_all: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = task_api.TaskApi(api_client)
+    type = "type_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Index all files by type
+        api_instance.index_all(type)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TaskApi->index_all: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **type** | **str**|  | 
+ **type** | **str**|  |
 
 ### Return type
 
@@ -292,6 +394,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -301,31 +409,41 @@ No authorization required
 Index file of document by externalId and file type
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import task_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TaskApi()
-external_id = 'external_id_example' # str | 
-type = 'type_example' # str | 
 
-try:
-    # Index file of document by externalId and file type
-    api_instance.index_document(external_id, type)
-except ApiException as e:
-    print("Exception when calling TaskApi->index_document: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = task_api.TaskApi(api_client)
+    external_id = "externalId_example" # str | 
+    type = "type_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Index file of document by externalId and file type
+        api_instance.index_document(external_id, type)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TaskApi->index_document: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **external_id** | **str**|  | 
- **type** | **str**|  | 
+ **external_id** | **str**|  |
+ **type** | **str**|  |
 
 ### Return type
 
@@ -339,6 +457,12 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -348,29 +472,39 @@ No authorization required
 Index all files of a single index
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import task_api
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TaskApi()
-name = 'name_example' # str | 
 
-try:
-    # Index all files of a single index
-    api_instance.index_single_index(name)
-except ApiException as e:
-    print("Exception when calling TaskApi->index_single_index: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = task_api.TaskApi(api_client)
+    name = "name_example" # str | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Index all files of a single index
+        api_instance.index_single_index(name)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TaskApi->index_single_index: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**|  | 
+ **name** | **str**|  |
 
 ### Return type
 
@@ -385,41 +519,59 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: Not defined
 
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**0** | successful operation |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **post_identifiers**
-> list[Document] post_identifiers(body=body)
+> [Document] post_identifiers()
 
 
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import task_api
+from textrepo_client.model.document import Document
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TaskApi()
-body = textrepo_client.InputStream() # InputStream |  (optional)
 
-try:
-    api_response = api_instance.post_identifiers(body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling TaskApi->post_identifiers: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = task_api.TaskApi(api_client)
+    body = {} # {str: (bool, date, datetime, dict, float, int, list, str, none_type)} |  (optional)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        api_response = api_instance.post_identifiers(body=body)
+        pprint(api_response)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TaskApi->post_identifiers: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**InputStream**](InputStream.md)|  | [optional] 
+ **body** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**|  | [optional]
 
 ### Return type
 
-[**list[Document]**](Document.md)
+[**[Document]**](Document.md)
 
 ### Authorization
 
@@ -427,44 +579,62 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_identifiers**
-> list[Document] put_identifiers(body=body)
+> [Document] put_identifiers()
 
 
 
 ### Example
+
 ```python
-from __future__ import print_function
 import time
 import textrepo_client
-from textrepo_client.rest import ApiException
+from textrepo_client.api import task_api
+from textrepo_client.model.document import Document
 from pprint import pprint
+# Defining the host is optional and defaults to http://localhost/api
+# See configuration.py for a list of all supported configuration parameters.
+configuration = textrepo_client.Configuration(
+    host = "http://localhost/api"
+)
 
-# create an instance of the API class
-api_instance = textrepo_client.TaskApi()
-body = textrepo_client.InputStream() # InputStream |  (optional)
 
-try:
-    api_response = api_instance.put_identifiers(body=body)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling TaskApi->put_identifiers: %s\n" % e)
+# Enter a context with an instance of the API client
+with textrepo_client.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = task_api.TaskApi(api_client)
+    body = {} # {str: (bool, date, datetime, dict, float, int, list, str, none_type)} |  (optional)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        api_response = api_instance.put_identifiers(body=body)
+        pprint(api_response)
+    except textrepo_client.ApiException as e:
+        print("Exception when calling TaskApi->put_identifiers: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**InputStream**](InputStream.md)|  | [optional] 
+ **body** | **{str: (bool, date, datetime, dict, float, int, list, str, none_type)}**|  | [optional]
 
 ### Return type
 
-[**list[Document]**](Document.md)
+[**[Document]**](Document.md)
 
 ### Authorization
 
@@ -472,8 +642,14 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: */*
+ - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | successful operation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
