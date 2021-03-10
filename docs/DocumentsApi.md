@@ -1,6 +1,6 @@
 # textrepo_client.DocumentsApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,10 +31,10 @@ from textrepo_client.api import documents_api
 from textrepo_client.model.result_document import ResultDocument
 from textrepo_client.model.form_document import FormDocument
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -96,10 +96,10 @@ import time
 import textrepo_client
 from textrepo_client.api import documents_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -157,10 +157,10 @@ import time
 import textrepo_client
 from textrepo_client.api import documents_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -220,10 +220,10 @@ import time
 import textrepo_client
 from textrepo_client.api import documents_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -282,10 +282,10 @@ import textrepo_client
 from textrepo_client.api import documents_api
 from textrepo_client.model.result_document import ResultDocument
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -345,10 +345,10 @@ import textrepo_client
 from textrepo_client.api import documents_api
 from textrepo_client.model.result_page import ResultPage
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -357,8 +357,8 @@ with textrepo_client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = documents_api.DocumentsApi(api_client)
     doc_id = "docId_example" # str | 
-    limit = 1 # int |  (optional)
-    offset = 1 # int |  (optional)
+    limit = "limit_example" # str |  (optional)
+    offset = "offset_example" # str |  (optional)
 
     # example passing only required values which don't have defaults set
     try:
@@ -384,8 +384,8 @@ with textrepo_client.ApiClient() as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **doc_id** | **str**|  |
- **limit** | **int**|  | [optional]
- **offset** | **int**|  | [optional]
+ **limit** | **str**|  | [optional]
+ **offset** | **str**|  | [optional]
 
 ### Return type
 
@@ -409,7 +409,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_document_metadata**
-> {str: (str,)} get_document_metadata(doc_id)
+> {str: ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},)} get_document_metadata(doc_id)
 
 Retrieve document metadata
 
@@ -420,10 +420,10 @@ import time
 import textrepo_client
 from textrepo_client.api import documents_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -451,7 +451,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**{str: (str,)}**
+**{str: ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},)}**
 
 ### Authorization
 
@@ -483,10 +483,10 @@ import textrepo_client
 from textrepo_client.api import documents_api
 from textrepo_client.model.result_page import ResultPage
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -495,9 +495,9 @@ with textrepo_client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = documents_api.DocumentsApi(api_client)
     external_id = "externalId_example" # str |  (optional)
-    created_after = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime |  (optional)
-    limit = 1 # int |  (optional)
-    offset = 1 # int |  (optional)
+    created_after = "createdAfter_example" # str |  (optional)
+    limit = "limit_example" # str |  (optional)
+    offset = "offset_example" # str |  (optional)
 
     # example passing only required values which don't have defaults set
     # and optional values
@@ -515,9 +515,9 @@ with textrepo_client.ApiClient() as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **external_id** | **str**|  | [optional]
- **created_after** | **datetime**|  | [optional]
- **limit** | **int**|  | [optional]
- **offset** | **int**|  | [optional]
+ **created_after** | **str**|  | [optional]
+ **limit** | **str**|  | [optional]
+ **offset** | **str**|  | [optional]
 
 ### Return type
 
@@ -552,10 +552,10 @@ import time
 import textrepo_client
 from textrepo_client.api import documents_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -611,10 +611,10 @@ from textrepo_client.api import documents_api
 from textrepo_client.model.result_document import ResultDocument
 from textrepo_client.model.form_document import FormDocument
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -686,10 +686,10 @@ import time
 import textrepo_client
 from textrepo_client.api import documents_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 

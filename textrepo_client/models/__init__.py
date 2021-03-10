@@ -9,15 +9,20 @@
 # import sys
 # sys.setrecursionlimit(n)
 
-from textrepo_client.model.document import Document
+from textrepo_client.model.chronology import Chronology
 from textrepo_client.model.form_document import FormDocument
 from textrepo_client.model.form_text_repo_file import FormTextRepoFile
 from textrepo_client.model.form_type import FormType
 from textrepo_client.model.form_version import FormVersion
+from textrepo_client.model.local_date_time import LocalDateTime
+from textrepo_client.model.result_about import ResultAbout
+from textrepo_client.model.result_about_version import ResultAboutVersion
 from textrepo_client.model.result_document import ResultDocument
 from textrepo_client.model.result_documents_overview import ResultDocumentsOverview
+from textrepo_client.model.result_indexer import ResultIndexer
+from textrepo_client.model.result_indexer_fields_configuration import ResultIndexerFieldsConfiguration
 from textrepo_client.model.result_page import ResultPage
 from textrepo_client.model.result_page_params import ResultPageParams
-from textrepo_client.model.result_page_result_document import ResultPageResultDocument
 from textrepo_client.model.result_text_repo_file import ResultTextRepoFile
+from textrepo_client.model.result_type import ResultType
 from textrepo_client.model.result_version import ResultVersion

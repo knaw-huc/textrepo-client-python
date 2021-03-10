@@ -1,18 +1,18 @@
 # textrepo_client.TypesApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_type**](TypesApi.md#create_type) | **POST** /rest/types | Create type
 [**delete_type**](TypesApi.md#delete_type) | **DELETE** /rest/types/{id} | Delete type
-[**get_type**](TypesApi.md#get_type) | **GET** /rest/types/{id} | Retrieve types
+[**get_type**](TypesApi.md#get_type) | **GET** /rest/types/{id} | Retrieve type
 [**get_types**](TypesApi.md#get_types) | **GET** /rest/types | Retrieve types
 [**put_type**](TypesApi.md#put_type) | **PUT** /rest/types/{id} | Create or update type
 
 
 # **create_type**
-> create_type()
+> ResultType create_type()
 
 Create type
 
@@ -22,12 +22,13 @@ Create type
 import time
 import textrepo_client
 from textrepo_client.api import types_api
+from textrepo_client.model.result_type import ResultType
 from textrepo_client.model.form_type import FormType
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -44,7 +45,8 @@ with textrepo_client.ApiClient() as api_client:
     # and optional values
     try:
         # Create type
-        api_instance.create_type(body=body)
+        api_response = api_instance.create_type(body=body)
+        pprint(api_response)
     except textrepo_client.ApiException as e:
         print("Exception when calling TypesApi->create_type: %s\n" % e)
 ```
@@ -58,7 +60,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ResultType**](ResultType.md)
 
 ### Authorization
 
@@ -67,13 +69,13 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | successful operation |  -  |
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -89,10 +91,10 @@ import time
 import textrepo_client
 from textrepo_client.api import types_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -134,14 +136,14 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | successful operation |  -  |
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_type**
-> get_type(id)
+> ResultType get_type(id)
 
-Retrieve types
+Retrieve type
 
 ### Example
 
@@ -149,11 +151,12 @@ Retrieve types
 import time
 import textrepo_client
 from textrepo_client.api import types_api
+from textrepo_client.model.result_type import ResultType
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -165,8 +168,9 @@ with textrepo_client.ApiClient() as api_client:
 
     # example passing only required values which don't have defaults set
     try:
-        # Retrieve types
-        api_instance.get_type(id)
+        # Retrieve type
+        api_response = api_instance.get_type(id)
+        pprint(api_response)
     except textrepo_client.ApiException as e:
         print("Exception when calling TypesApi->get_type: %s\n" % e)
 ```
@@ -180,7 +184,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ResultType**](ResultType.md)
 
 ### Authorization
 
@@ -189,18 +193,18 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | successful operation |  -  |
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_types**
-> get_types()
+> ResultType get_types()
 
 Retrieve types
 
@@ -210,11 +214,12 @@ Retrieve types
 import time
 import textrepo_client
 from textrepo_client.api import types_api
+from textrepo_client.model.result_type import ResultType
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -226,7 +231,8 @@ with textrepo_client.ApiClient() as api_client:
     # example, this endpoint has no required or optional parameters
     try:
         # Retrieve types
-        api_instance.get_types()
+        api_response = api_instance.get_types()
+        pprint(api_response)
     except textrepo_client.ApiException as e:
         print("Exception when calling TypesApi->get_types: %s\n" % e)
 ```
@@ -237,7 +243,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**ResultType**](ResultType.md)
 
 ### Authorization
 
@@ -246,18 +252,18 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | successful operation |  -  |
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **put_type**
-> put_type(id)
+> ResultType put_type(id)
 
 Create or update type
 
@@ -267,12 +273,13 @@ Create or update type
 import time
 import textrepo_client
 from textrepo_client.api import types_api
+from textrepo_client.model.result_type import ResultType
 from textrepo_client.model.form_type import FormType
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -289,7 +296,8 @@ with textrepo_client.ApiClient() as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Create or update type
-        api_instance.put_type(id)
+        api_response = api_instance.put_type(id)
+        pprint(api_response)
     except textrepo_client.ApiException as e:
         print("Exception when calling TypesApi->put_type: %s\n" % e)
 
@@ -297,7 +305,8 @@ with textrepo_client.ApiClient() as api_client:
     # and optional values
     try:
         # Create or update type
-        api_instance.put_type(id, body=body)
+        api_response = api_instance.put_type(id, body=body)
+        pprint(api_response)
     except textrepo_client.ApiException as e:
         print("Exception when calling TypesApi->put_type: %s\n" % e)
 ```
@@ -312,7 +321,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ResultType**](ResultType.md)
 
 ### Authorization
 
@@ -321,13 +330,13 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | successful operation |  -  |
+**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

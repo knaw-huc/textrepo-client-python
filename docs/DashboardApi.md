@@ -1,6 +1,6 @@
 # textrepo_client.DashboardApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **count_documents_by_metadata_key**
-> count_documents_by_metadata_key()
+> {str: ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},)} count_documents_by_metadata_key()
 
 Get document count breakdown by metadata key (yields Map: key -> count)
 
@@ -22,10 +22,10 @@ import time
 import textrepo_client
 from textrepo_client.api import dashboard_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -37,7 +37,8 @@ with textrepo_client.ApiClient() as api_client:
     # example, this endpoint has no required or optional parameters
     try:
         # Get document count breakdown by metadata key (yields Map: key -> count)
-        api_instance.count_documents_by_metadata_key()
+        api_response = api_instance.count_documents_by_metadata_key()
+        pprint(api_response)
     except textrepo_client.ApiException as e:
         print("Exception when calling DashboardApi->count_documents_by_metadata_key: %s\n" % e)
 ```
@@ -48,7 +49,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+**{str: ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},)}**
 
 ### Authorization
 
@@ -57,7 +58,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -79,10 +80,10 @@ import time
 import textrepo_client
 from textrepo_client.api import dashboard_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -129,7 +130,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **find_orphans**
-> ResultDocument find_orphans()
+> ResultPage find_orphans()
 
 Find orphans: documents with neither metadata nor any associated files
 
@@ -139,12 +140,12 @@ Find orphans: documents with neither metadata nor any associated files
 import time
 import textrepo_client
 from textrepo_client.api import dashboard_api
-from textrepo_client.model.result_document import ResultDocument
+from textrepo_client.model.result_page import ResultPage
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -152,8 +153,8 @@ configuration = textrepo_client.Configuration(
 with textrepo_client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = dashboard_api.DashboardApi(api_client)
-    limit = 1 # int |  (optional)
-    offset = 1 # int |  (optional)
+    limit = "limit_example" # str |  (optional)
+    offset = "offset_example" # str |  (optional)
 
     # example passing only required values which don't have defaults set
     # and optional values
@@ -170,12 +171,12 @@ with textrepo_client.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **limit** | **int**|  | [optional]
- **offset** | **int**|  | [optional]
+ **limit** | **str**|  | [optional]
+ **offset** | **str**|  | [optional]
 
 ### Return type
 
-[**ResultDocument**](ResultDocument.md)
+[**ResultPage**](ResultPage.md)
 
 ### Authorization
 
@@ -207,10 +208,10 @@ import textrepo_client
 from textrepo_client.api import dashboard_api
 from textrepo_client.model.result_documents_overview import ResultDocumentsOverview
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 

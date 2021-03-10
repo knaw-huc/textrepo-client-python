@@ -1,12 +1,12 @@
 # textrepo_client.IndexApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**index_all**](IndexApi.md#index_all) | **POST** /task/index/files/{type} | Index all files by type
 [**index_document**](IndexApi.md#index_document) | **POST** /task/index/document/{externalId}/{type} | Index file of document by externalId and file type
-[**index_single_index**](IndexApi.md#index_single_index) | **POST** /task/index/{name} | Index all files of a single index
+[**index_single_index**](IndexApi.md#index_single_index) | **POST** /task/index/{name} | Index or reindex single index with all relevant files, including those without versions
 
 
 # **index_all**
@@ -21,10 +21,10 @@ import time
 import textrepo_client
 from textrepo_client.api import index_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -82,10 +82,10 @@ import time
 import textrepo_client
 from textrepo_client.api import index_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -136,7 +136,7 @@ No authorization required
 # **index_single_index**
 > index_single_index(name)
 
-Index all files of a single index
+Index or reindex single index with all relevant files, including those without versions
 
 ### Example
 
@@ -145,10 +145,10 @@ import time
 import textrepo_client
 from textrepo_client.api import index_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost/api
+# Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost/api"
+    host = "http://localhost"
 )
 
 
@@ -160,7 +160,7 @@ with textrepo_client.ApiClient() as api_client:
 
     # example passing only required values which don't have defaults set
     try:
-        # Index all files of a single index
+        # Index or reindex single index with all relevant files, including those without versions
         api_instance.index_single_index(name)
     except textrepo_client.ApiException as e:
         print("Exception when calling IndexApi->index_single_index: %s\n" % e)

@@ -1,0 +1,1649 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "The API for TextRepo",
+    "version" : "1.0.0",
+    "title" : "TextRepo API"
+  },
+  "tags" : [ {
+    "name" : "metadata"
+  }, {
+    "name" : "versions"
+  }, {
+    "name" : "about"
+  }, {
+    "name" : "files"
+  }, {
+    "name" : "task"
+  }, {
+    "name" : "find"
+  }, {
+    "name" : "import"
+  }, {
+    "name" : "dashboard"
+  }, {
+    "name" : "types"
+  }, {
+    "name" : "documents"
+  }, {
+    "name" : "contents"
+  }, {
+    "name" : "register"
+  }, {
+    "name" : "index"
+  } ],
+  "paths" : {
+    "" : {
+      "get" : {
+        "tags" : [ "about" ],
+        "summary" : "Get info about application version and configuration",
+        "description" : "",
+        "operationId" : "getAbout",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultAbout"
+            }
+          }
+        }
+      }
+    },
+    "/dashboard" : {
+      "get" : {
+        "tags" : [ "dashboard" ],
+        "summary" : "Get document count overview",
+        "description" : "",
+        "operationId" : "getStats",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultDocumentsOverview"
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/metadata" : {
+      "get" : {
+        "tags" : [ "dashboard" ],
+        "summary" : "Get document count breakdown by metadata key (yields Map: key -> count)",
+        "description" : "",
+        "operationId" : "countDocumentsByMetadataKey",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK. Body contains Map: String key -> int count",
+            "schema" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/metadata/{key}" : {
+      "get" : {
+        "tags" : [ "dashboard" ],
+        "summary" : "Get document count breakdown by metadata value for given metadata key",
+        "description" : "",
+        "operationId" : "countDocumentsByMetadataValue",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "key",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK. Body contains Map: String value -> int count. Link rel='collection' to relevant documents"
+          }
+        }
+      }
+    },
+    "/dashboard/orphans" : {
+      "get" : {
+        "tags" : [ "dashboard" ],
+        "summary" : "Find orphans: documents with neither metadata nor any associated files",
+        "description" : "",
+        "operationId" : "findOrphans",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultPage"
+            }
+          }
+        }
+      }
+    },
+    "/rest/contents/{sha}" : {
+      "get" : {
+        "tags" : [ "contents" ],
+        "summary" : "Retrieve contents",
+        "description" : "",
+        "operationId" : "getContents",
+        "produces" : [ "application/octet-stream", "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept-Encoding",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : ""
+        }, {
+          "name" : "sha",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/rest/documents" : {
+      "get" : {
+        "tags" : [ "documents" ],
+        "summary" : "Retrieve documents, newest first",
+        "description" : "",
+        "operationId" : "getDocuments",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "externalId",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "createdAfter",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultPage"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "documents" ],
+        "summary" : "Create document",
+        "description" : "",
+        "operationId" : "createDocument",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FormDocument"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultDocument"
+            }
+          }
+        }
+      }
+    },
+    "/rest/documents/{docId}/files" : {
+      "get" : {
+        "tags" : [ "documents" ],
+        "summary" : "Retrieve document files",
+        "description" : "",
+        "operationId" : "getDocumentFiles",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "docId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultPage"
+            }
+          }
+        }
+      }
+    },
+    "/rest/documents/{docId}/metadata" : {
+      "get" : {
+        "tags" : [ "metadata", "documents" ],
+        "summary" : "Retrieve document metadata",
+        "description" : "",
+        "operationId" : "getDocumentMetadata",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "docId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "metadata", "documents" ],
+        "summary" : "Not allowed to post metadata: use put instead",
+        "description" : "",
+        "operationId" : "postDocumentMetadataIsNotAllowed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "405" : {
+            "description" : "Not allowed to post metadata: use put instead"
+          }
+        }
+      }
+    },
+    "/rest/documents/{docId}/metadata/{key}" : {
+      "put" : {
+        "tags" : [ "metadata", "documents" ],
+        "summary" : "Create or update document metadata entry",
+        "description" : "",
+        "operationId" : "putDocumentMetadataEntry",
+        "consumes" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "docId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "key",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "metadata", "documents" ],
+        "summary" : "Delete document metadata entry",
+        "description" : "",
+        "operationId" : "deleteDocumentMetadataEntry",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "docId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "key",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/rest/documents/{id}" : {
+      "get" : {
+        "tags" : [ "documents" ],
+        "summary" : "Retrieve document",
+        "description" : "",
+        "operationId" : "getDocument",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultDocument"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "documents" ],
+        "summary" : "Create or update document",
+        "description" : "",
+        "operationId" : "putDocument",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FormDocument"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultDocument"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "documents" ],
+        "summary" : "Delete document",
+        "description" : "",
+        "operationId" : "deleteDocument",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/rest/files" : {
+      "post" : {
+        "tags" : [ "files" ],
+        "summary" : "Create file",
+        "description" : "",
+        "operationId" : "createFile",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FormTextRepoFile"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultTextRepoFile"
+            }
+          }
+        }
+      }
+    },
+    "/rest/files/{fileId}/metadata" : {
+      "get" : {
+        "tags" : [ "metadata", "files" ],
+        "summary" : "Retrieve file metadata",
+        "description" : "",
+        "operationId" : "getFileMetadata",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "fileId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "metadata", "files" ],
+        "summary" : "Not allowed to post metadata: use put instead",
+        "description" : "",
+        "operationId" : "postFileMetadataIsNotAllowed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "405" : {
+            "description" : "Not allowed to post metadata: use put instead"
+          }
+        }
+      }
+    },
+    "/rest/files/{fileId}/metadata/{key}" : {
+      "put" : {
+        "tags" : [ "metadata", "files" ],
+        "summary" : "Create or update file metadata entry",
+        "description" : "",
+        "operationId" : "putFileMetadataEntry",
+        "consumes" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "fileId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "key",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "metadata", "files" ],
+        "summary" : "Delete file metadata entry",
+        "description" : "",
+        "operationId" : "deleteFileMetadataEntry",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "fileId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "key",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/rest/files/{fileId}/versions" : {
+      "get" : {
+        "tags" : [ "versions", "files" ],
+        "summary" : "Retrieve file versions, newest first",
+        "description" : "",
+        "operationId" : "getFileVersions",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "fileId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "createdAfter",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultVersion"
+            }
+          }
+        }
+      }
+    },
+    "/rest/files/{id}" : {
+      "get" : {
+        "tags" : [ "files" ],
+        "summary" : "Retrieve file",
+        "description" : "",
+        "operationId" : "getFile",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultTextRepoFile"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "files" ],
+        "summary" : "Create or update file",
+        "description" : "",
+        "operationId" : "putFile",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FormTextRepoFile"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultTextRepoFile"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "files" ],
+        "summary" : "Delete file",
+        "description" : "",
+        "operationId" : "deleteFile",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/rest/metadata/{key}/documents" : {
+      "get" : {
+        "tags" : [ "metadata" ],
+        "summary" : "Find which documents have a given metadata key",
+        "description" : "",
+        "operationId" : "getDocumentsGivenMetadataKey",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "key",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/types" : {
+      "get" : {
+        "tags" : [ "types" ],
+        "summary" : "Retrieve types",
+        "description" : "",
+        "operationId" : "getTypes",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultType"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "types" ],
+        "summary" : "Create type",
+        "description" : "",
+        "operationId" : "createType",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FormType"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultType"
+            }
+          }
+        }
+      }
+    },
+    "/rest/types/{id}" : {
+      "get" : {
+        "tags" : [ "types" ],
+        "summary" : "Retrieve type",
+        "description" : "",
+        "operationId" : "getType",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultType"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "types" ],
+        "summary" : "Create or update type",
+        "description" : "",
+        "operationId" : "putType",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FormType"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultType"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "types" ],
+        "summary" : "Delete type",
+        "description" : "",
+        "operationId" : "deleteType",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/rest/versions" : {
+      "post" : {
+        "tags" : [ "versions" ],
+        "summary" : "Create version",
+        "description" : "",
+        "operationId" : "createVersion",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/InputStream"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultVersion"
+            }
+          }
+        }
+      }
+    },
+    "/rest/versions/{id}" : {
+      "get" : {
+        "tags" : [ "versions" ],
+        "summary" : "Retrieve version",
+        "description" : "",
+        "operationId" : "getVersion",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultVersion"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "versions" ],
+        "summary" : "Not allowed to update a version: create a new version using POST",
+        "description" : "",
+        "operationId" : "putVersionIsNotAllowed",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FormVersion"
+          }
+        } ],
+        "responses" : {
+          "405" : {
+            "description" : "Not allowed to update a version: create a new version using POST"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "versions" ],
+        "summary" : "Delete version",
+        "description" : "",
+        "operationId" : "deleteVersion",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/rest/versions/{versionId}/contents" : {
+      "get" : {
+        "tags" : [ "versions", "contents" ],
+        "summary" : "Retrieve version contents",
+        "description" : "",
+        "operationId" : "getVersionContents",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "Accept-Encoding",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : ""
+        }, {
+          "name" : "versionId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ResultVersion"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "versions", "contents" ],
+        "summary" : "Not allowed to post contents: post new version instead",
+        "description" : "",
+        "operationId" : "postVersionContentsIsNotAllowed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "405" : {
+            "description" : "Not allowed to post contents: post new version instead"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "versions", "contents" ],
+        "summary" : "Not allowed to put contents of version: post new version instead",
+        "description" : "",
+        "operationId" : "putVersionContentsIsNotAllowed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "405" : {
+            "description" : "Not allowed to put contents of version: post new version instead"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "versions", "contents" ],
+        "summary" : "Not allowed to delete contents of version: delete version instead",
+        "description" : "",
+        "operationId" : "deleteVersionContentsIsNotAllowed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "405" : {
+            "description" : "Not allowed to delete contents of version: delete version instead"
+          }
+        }
+      }
+    },
+    "/rest/versions/{versionId}/metadata" : {
+      "get" : {
+        "tags" : [ "metadata", "versions" ],
+        "summary" : "Retrieve version metadata",
+        "description" : "",
+        "operationId" : "getVersionMetadata",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "versionId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "metadata", "versions" ],
+        "summary" : "Not allowed to post metadata: use put instead",
+        "description" : "",
+        "operationId" : "postVersionMetadataIsNotAllowed",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "405" : {
+            "description" : "Not allowed to post metadata: use put instead"
+          }
+        }
+      }
+    },
+    "/rest/versions/{versionId}/metadata/{key}" : {
+      "put" : {
+        "tags" : [ "metadata", "versions" ],
+        "summary" : "Create or update version metadata entry",
+        "description" : "",
+        "operationId" : "putVersionMetadataEntry",
+        "consumes" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "versionId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "key",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "metadata", "versions" ],
+        "summary" : "Delete version metadata entry",
+        "description" : "",
+        "operationId" : "deleteVersionMetadataEntry",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "versionId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string",
+          "format" : "uuid"
+        }, {
+          "name" : "key",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/task/delete/documents/{externalId}" : {
+      "delete" : {
+        "tags" : [ "task", "documents" ],
+        "summary" : "Delete a document including its metadata, files, versions and contents. Contents are only only deleted when not referenced by any other versions.",
+        "description" : "",
+        "operationId" : "deleteDocumentRecursively",
+        "parameters" : [ {
+          "name" : "externalId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/task/find/{externalId}/document/metadata" : {
+      "get" : {
+        "tags" : [ "task", "find" ],
+        "summary" : "Find metadata of document by external ID, with header links to original and parent resource",
+        "description" : "",
+        "operationId" : "getDocumentMetadataForExternalId",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "externalId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "404" : {
+            "description" : "Given document could not be found"
+          }
+        }
+      }
+    },
+    "/task/find/{externalId}/file/contents" : {
+      "get" : {
+        "tags" : [ "task", "find" ],
+        "summary" : "Find contents of latest file version by external ID and file type, with header links to version history, parent and type resource",
+        "description" : "",
+        "operationId" : "getLatestFileVersionContent",
+        "produces" : [ "application/json", "application/octet-stream" ],
+        "parameters" : [ {
+          "name" : "Accept-Encoding",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : ""
+        }, {
+          "name" : "externalId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "type",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "404" : {
+            "description" : "Given type, document or supposed contents could not be found"
+          }
+        }
+      }
+    },
+    "/task/find/{externalId}/file/metadata" : {
+      "get" : {
+        "tags" : [ "task", "find" ],
+        "summary" : "Find metadata of file by external ID and file type, with header links to original, parent and type resource",
+        "description" : "",
+        "operationId" : "getFileMetadataForExternalId",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "externalId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "type",
+          "in" : "query",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "404" : {
+            "description" : "Given file could not be found"
+          }
+        }
+      }
+    },
+    "/task/import/documents/{externalId}/{typeName}" : {
+      "post" : {
+        "tags" : [ "task", "import" ],
+        "summary" : "Import file as the current version for {typeName} of document referenced by {externalId} without indexing",
+        "description" : "",
+        "operationId" : "importDocumentContentsForFileWithType",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "externalId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "typeName",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "allowNewDocument",
+          "in" : "query",
+          "required" : false,
+          "type" : "boolean",
+          "default" : "false"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/InputStream"
+          }
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FormDataContentDisposition"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "CREATED"
+          }
+        }
+      }
+    },
+    "/task/index/document/{externalId}/{type}" : {
+      "post" : {
+        "tags" : [ "task", "index" ],
+        "summary" : "Index file of document by externalId and file type",
+        "description" : "",
+        "operationId" : "indexDocument",
+        "parameters" : [ {
+          "name" : "externalId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "type",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/task/index/files/{type}" : {
+      "post" : {
+        "tags" : [ "task", "index" ],
+        "summary" : "Index all files by type",
+        "description" : "",
+        "operationId" : "indexAll",
+        "parameters" : [ {
+          "name" : "type",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/task/index/{name}" : {
+      "post" : {
+        "tags" : [ "task", "index" ],
+        "summary" : "Index or reindex single index with all relevant files, including those without versions",
+        "description" : "",
+        "operationId" : "indexSingleIndex",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Chronology" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "calendarType" : {
+          "type" : "string"
+        }
+      }
+    },
+    "FormDataContentDisposition" : {
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string"
+        },
+        "parameters" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "fileName" : {
+          "type" : "string"
+        },
+        "creationDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "modificationDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "readDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "size" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "FormDocument" : {
+      "type" : "object",
+      "properties" : {
+        "externalId" : {
+          "type" : "string",
+          "readOnly" : true
+        }
+      }
+    },
+    "FormTextRepoFile" : {
+      "type" : "object",
+      "required" : [ "docId", "typeId" ],
+      "properties" : {
+        "docId" : {
+          "type" : "string",
+          "format" : "uuid",
+          "readOnly" : true
+        },
+        "typeId" : {
+          "type" : "integer",
+          "format" : "int32",
+          "readOnly" : true
+        }
+      }
+    },
+    "FormType" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "readOnly" : true
+        },
+        "mimetype" : {
+          "type" : "string",
+          "readOnly" : true
+        }
+      }
+    },
+    "FormVersion" : {
+      "type" : "object",
+      "properties" : {
+        "externalId" : {
+          "type" : "string",
+          "readOnly" : true
+        }
+      }
+    },
+    "InputStream" : {
+      "type" : "object"
+    },
+    "LocalDateTime" : {
+      "type" : "object",
+      "properties" : {
+        "nano" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "year" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "monthValue" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "dayOfMonth" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "hour" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "minute" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "second" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "dayOfWeek" : {
+          "type" : "string",
+          "enum" : [ "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY" ]
+        },
+        "dayOfYear" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "month" : {
+          "type" : "string",
+          "enum" : [ "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" ]
+        },
+        "chronology" : {
+          "$ref" : "#/definitions/Chronology"
+        }
+      }
+    },
+    "ResultAbout" : {
+      "type" : "object",
+      "properties" : {
+        "version" : {
+          "$ref" : "#/definitions/ResultAboutVersion"
+        },
+        "contentDecompressionLimit" : {
+          "type" : "string"
+        },
+        "indexers" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ResultIndexer"
+          }
+        }
+      }
+    },
+    "ResultAboutVersion" : {
+      "type" : "object",
+      "properties" : {
+        "tag" : {
+          "type" : "string"
+        },
+        "commit" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ResultDocument" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "readOnly" : true
+        },
+        "externalId" : {
+          "type" : "string",
+          "readOnly" : true
+        },
+        "createdAt" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/LocalDateTime"
+        }
+      }
+    },
+    "ResultDocumentsOverview" : {
+      "type" : "object",
+      "properties" : {
+        "documentCount" : {
+          "type" : "integer",
+          "format" : "int64",
+          "readOnly" : true
+        },
+        "hasFile" : {
+          "type" : "integer",
+          "format" : "int64",
+          "readOnly" : true
+        },
+        "hasMetadata" : {
+          "type" : "integer",
+          "format" : "int64",
+          "readOnly" : true
+        },
+        "hasBoth" : {
+          "type" : "integer",
+          "format" : "int64",
+          "readOnly" : true
+        },
+        "hasNone" : {
+          "type" : "integer",
+          "format" : "int64",
+          "readOnly" : true
+        }
+      }
+    },
+    "ResultIndexer" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "hosts" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "mimetypes" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "fields" : {
+          "$ref" : "#/definitions/ResultIndexerFieldsConfiguration"
+        },
+        "mapping" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ResultIndexerFieldsConfiguration" : {
+      "type" : "object",
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "readOnly" : true
+        },
+        "url" : {
+          "type" : "string",
+          "readOnly" : true
+        }
+      }
+    },
+    "ResultPage" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "readOnly" : true,
+          "items" : {
+            "type" : "object"
+          }
+        },
+        "total" : {
+          "type" : "integer",
+          "format" : "int64",
+          "readOnly" : true
+        },
+        "page" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/ResultPageParams"
+        }
+      }
+    },
+    "ResultPageParams" : {
+      "type" : "object",
+      "properties" : {
+        "limit" : {
+          "type" : "integer",
+          "format" : "int32",
+          "readOnly" : true
+        },
+        "offset" : {
+          "type" : "integer",
+          "format" : "int32",
+          "readOnly" : true
+        }
+      }
+    },
+    "ResultTextRepoFile" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "readOnly" : true
+        },
+        "docId" : {
+          "type" : "string",
+          "format" : "uuid",
+          "readOnly" : true
+        },
+        "typeId" : {
+          "type" : "integer",
+          "format" : "int32",
+          "readOnly" : true
+        }
+      }
+    },
+    "ResultType" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "readOnly" : true
+        },
+        "name" : {
+          "type" : "string",
+          "readOnly" : true
+        },
+        "mimetype" : {
+          "type" : "string",
+          "readOnly" : true
+        }
+      }
+    },
+    "ResultVersion" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "format" : "uuid",
+          "readOnly" : true
+        },
+        "fileId" : {
+          "type" : "string",
+          "format" : "uuid",
+          "readOnly" : true
+        },
+        "createdAt" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/LocalDateTime"
+        },
+        "contentsSha" : {
+          "type" : "string",
+          "readOnly" : true
+        }
+      }
+    }
+  }
+}
