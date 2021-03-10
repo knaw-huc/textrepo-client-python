@@ -1475,7 +1475,8 @@
         },
         "createdAt" : {
           "readOnly" : true,
-          "$ref" : "#/definitions/LocalDateTime"
+          "type" : "string",
+          "format" : "date-time"
         }
       }
     },
@@ -1637,7 +1638,9 @@
         },
         "createdAt" : {
           "readOnly" : true,
-          "$ref" : "#/definitions/LocalDateTime"
+          "type" : "string",
+          "format" : "date-time"
+
         },
         "contentsSha" : {
           "type" : "string",
