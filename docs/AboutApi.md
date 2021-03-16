@@ -1,6 +1,6 @@
 # textrepo_client.AboutApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -20,10 +20,10 @@ import textrepo_client
 from textrepo_client.api import about_api
 from textrepo_client.model.result_about import ResultAbout
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 

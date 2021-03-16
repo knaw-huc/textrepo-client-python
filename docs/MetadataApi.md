@@ -1,6 +1,6 @@
 # textrepo_client.MetadataApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,10 +31,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -94,10 +94,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -157,10 +157,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -209,7 +209,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_document_metadata**
-> {str: ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},)} get_document_metadata(doc_id)
+> {str: (str,)} get_document_metadata(doc_id)
 
 Retrieve document metadata
 
@@ -220,10 +220,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -251,7 +251,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**{str: ({str: (bool, date, datetime, dict, float, int, list, str, none_type)},)}**
+**{str: (str,)}**
 
 ### Authorization
 
@@ -271,7 +271,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_documents_given_metadata_key**
-> [{str: (bool, date, datetime, dict, float, int, list, str, none_type)}] get_documents_given_metadata_key(key)
+> [str] get_documents_given_metadata_key(key)
 
 Find which documents have a given metadata key
 
@@ -282,10 +282,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**[{str: (bool, date, datetime, dict, float, int, list, str, none_type)}]**
+**[str]**
 
 ### Authorization
 
@@ -333,7 +333,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_file_metadata**
-> get_file_metadata(file_id)
+> {str: (str,)} get_file_metadata(file_id)
 
 Retrieve file metadata
 
@@ -344,10 +344,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -360,7 +360,8 @@ with textrepo_client.ApiClient() as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Retrieve file metadata
-        api_instance.get_file_metadata(file_id)
+        api_response = api_instance.get_file_metadata(file_id)
+        pprint(api_response)
     except textrepo_client.ApiException as e:
         print("Exception when calling MetadataApi->get_file_metadata: %s\n" % e)
 ```
@@ -374,7 +375,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**{str: (str,)}**
 
 ### Authorization
 
@@ -383,7 +384,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -394,7 +395,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_version_metadata**
-> get_version_metadata(version_id)
+> {str: (str,)} get_version_metadata(version_id)
 
 Retrieve version metadata
 
@@ -405,10 +406,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -421,7 +422,8 @@ with textrepo_client.ApiClient() as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Retrieve version metadata
-        api_instance.get_version_metadata(version_id)
+        api_response = api_instance.get_version_metadata(version_id)
+        pprint(api_response)
     except textrepo_client.ApiException as e:
         print("Exception when calling MetadataApi->get_version_metadata: %s\n" % e)
 ```
@@ -435,7 +437,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**{str: (str,)}**
 
 ### Authorization
 
@@ -444,7 +446,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -466,10 +468,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -523,10 +525,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -580,10 +582,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -637,10 +639,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -710,10 +712,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -783,10 +785,10 @@ import time
 import textrepo_client
 from textrepo_client.api import metadata_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 

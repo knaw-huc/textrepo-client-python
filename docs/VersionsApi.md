@@ -1,6 +1,6 @@
 # textrepo_client.VersionsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -32,10 +32,10 @@ import textrepo_client
 from textrepo_client.api import versions_api
 from textrepo_client.model.result_version import ResultVersion
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -43,11 +43,14 @@ configuration = textrepo_client.Configuration(
 with textrepo_client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = versions_api.VersionsApi(api_client)
+    file_id = "file_id_example" # str |  (optional)
+    contents = open('/path/to/file', 'rb') # file_type |  (optional)
 
-    # example, this endpoint has no required or optional parameters
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # Create version
-        api_response = api_instance.create_version()
+        api_response = api_instance.create_version(file_id=file_id, contents=contents)
         pprint(api_response)
     except textrepo_client.ApiException as e:
         print("Exception when calling VersionsApi->create_version: %s\n" % e)
@@ -55,7 +58,11 @@ with textrepo_client.ApiClient() as api_client:
 
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file_id** | **str**|  | [optional]
+ **contents** | **file_type**|  | [optional]
 
 ### Return type
 
@@ -90,10 +97,10 @@ import time
 import textrepo_client
 from textrepo_client.api import versions_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -151,10 +158,10 @@ import time
 import textrepo_client
 from textrepo_client.api import versions_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -208,10 +215,10 @@ import time
 import textrepo_client
 from textrepo_client.api import versions_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -272,10 +279,10 @@ import textrepo_client
 from textrepo_client.api import versions_api
 from textrepo_client.model.result_version import ResultVersion
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -284,9 +291,9 @@ with textrepo_client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = versions_api.VersionsApi(api_client)
     file_id = "fileId_example" # str | 
-    limit = "limit_example" # str |  (optional)
-    offset = "offset_example" # str |  (optional)
-    created_after = "createdAfter_example" # str |  (optional)
+    limit = 1 # int |  (optional)
+    offset = 1 # int |  (optional)
+    created_after = dateutil_parser('1970-01-01T00:00:00.00Z') # datetime |  (optional)
 
     # example passing only required values which don't have defaults set
     try:
@@ -312,9 +319,9 @@ with textrepo_client.ApiClient() as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **file_id** | **str**|  |
- **limit** | **str**|  | [optional]
- **offset** | **str**|  | [optional]
- **created_after** | **str**|  | [optional]
+ **limit** | **int**|  | [optional]
+ **offset** | **int**|  | [optional]
+ **created_after** | **datetime**|  | [optional]
 
 ### Return type
 
@@ -350,10 +357,10 @@ import textrepo_client
 from textrepo_client.api import versions_api
 from textrepo_client.model.result_version import ResultVersion
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -413,10 +420,10 @@ import textrepo_client
 from textrepo_client.api import versions_api
 from textrepo_client.model.result_version import ResultVersion
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -475,7 +482,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_version_metadata**
-> get_version_metadata(version_id)
+> {str: (str,)} get_version_metadata(version_id)
 
 Retrieve version metadata
 
@@ -486,10 +493,10 @@ import time
 import textrepo_client
 from textrepo_client.api import versions_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -502,7 +509,8 @@ with textrepo_client.ApiClient() as api_client:
     # example passing only required values which don't have defaults set
     try:
         # Retrieve version metadata
-        api_instance.get_version_metadata(version_id)
+        api_response = api_instance.get_version_metadata(version_id)
+        pprint(api_response)
     except textrepo_client.ApiException as e:
         print("Exception when calling VersionsApi->get_version_metadata: %s\n" % e)
 ```
@@ -516,7 +524,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**{str: (str,)}**
 
 ### Authorization
 
@@ -525,7 +533,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
@@ -547,10 +555,10 @@ import time
 import textrepo_client
 from textrepo_client.api import versions_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -604,10 +612,10 @@ import time
 import textrepo_client
 from textrepo_client.api import versions_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -661,10 +669,10 @@ import time
 import textrepo_client
 from textrepo_client.api import versions_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -719,10 +727,10 @@ import textrepo_client
 from textrepo_client.api import versions_api
 from textrepo_client.model.form_version import FormVersion
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -792,10 +800,10 @@ import time
 import textrepo_client
 from textrepo_client.api import versions_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 

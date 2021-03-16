@@ -1,6 +1,6 @@
 # textrepo_client.TypesApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -25,10 +25,10 @@ from textrepo_client.api import types_api
 from textrepo_client.model.result_type import ResultType
 from textrepo_client.model.form_type import FormType
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -91,10 +91,10 @@ import time
 import textrepo_client
 from textrepo_client.api import types_api
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -153,10 +153,10 @@ import textrepo_client
 from textrepo_client.api import types_api
 from textrepo_client.model.result_type import ResultType
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -204,7 +204,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_types**
-> ResultType get_types()
+> [ResultType] get_types()
 
 Retrieve types
 
@@ -216,10 +216,10 @@ import textrepo_client
 from textrepo_client.api import types_api
 from textrepo_client.model.result_type import ResultType
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
@@ -243,7 +243,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ResultType**](ResultType.md)
+[**[ResultType]**](ResultType.md)
 
 ### Authorization
 
@@ -276,10 +276,10 @@ from textrepo_client.api import types_api
 from textrepo_client.model.result_type import ResultType
 from textrepo_client.model.form_type import FormType
 from pprint import pprint
-# Defining the host is optional and defaults to http://localhost
+# Defining the host is optional and defaults to http://localhost/api
 # See configuration.py for a list of all supported configuration parameters.
 configuration = textrepo_client.Configuration(
-    host = "http://localhost"
+    host = "http://localhost/api"
 )
 
 
