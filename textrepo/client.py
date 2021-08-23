@@ -1,3 +1,4 @@
+import http.client
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -303,19 +304,23 @@ class TextRepoClient:
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
     def __handle_response(self, response: Response, result_producers: dict):
+        status_code = response.status_code
+        status_message = http.client.responses[status_code]
         if (self.verbose):
             print(f'-> {response.request.method} {response.request.url}')
-            print(f'<- {response.status_code}')
-        if response.status_code in result_producers.keys():
+            print(f'<- {status_code} {status_message}')
+        if status_code in result_producers.keys():
             result = result_producers[response.status_code](response)
             # if (self.raise_exceptions):
             return result
-        # else:
-        #     return Success(response, result)
+            # else:
+            #     return Success(response, result)
         else:
             # if (self.raise_exceptions):
             raise Exception(
-                f'{response.request.method} {response.request.url} returned {response.status_code} : {response.text}')
+                f'{response.request.method} {response.request.url} returned {status_code} {status_message} : "{response.text}"')
+            # else:
+            #     return Failure(response)
 
 
 # else:
