@@ -10,7 +10,7 @@ with open('LICENSE', encoding='utf8') as f:
     license = f.read()
 
 setup(
-    name='textrepo-client',
+    name='textrepo',
     version='0.0.1',
     description='client to access textrepo',
     long_description=readme,
