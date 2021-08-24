@@ -208,7 +208,7 @@ class TextRepoClient:
                            limit: int = None,
                            offset: int = None,
                            created_after: datetime = None
-                           ) -> List[FileIdentifier]:
+                           ) -> List[VersionIdentifier]:
         url = f'{self.base_uri}/rest/files/{file_id}/versions'
         params = {}
         if created_after:
