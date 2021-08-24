@@ -306,7 +306,7 @@ class TextRepoClient:
     def __handle_response(self, response: Response, result_producers: dict):
         status_code = response.status_code
         status_message = http.client.responses[status_code]
-        if (self.verbose):
+        if self.verbose:
             print(f'-> {response.request.method} {response.request.url}')
             print(f'<- {status_code} {status_message}')
         if status_code in result_producers.keys():
