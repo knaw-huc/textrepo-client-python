@@ -317,8 +317,6 @@ class TextRepoClient:
         """
 
         url = f'{self.base_uri}/view/versions/{version_id}/segments/index/{start_index}/{end_index}'
-        from icecream import ic
-        ic(url)
         response = requests.get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
