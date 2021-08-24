@@ -175,10 +175,14 @@ class TextRepoClient:
         response = requests.delete(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: True})
 
-    def read_document_files(self, document_identifier: DocumentIdentifier, limit: int = None,
+    def read_document_files(self, document_identifier: DocumentIdentifier,
+                            type_id: int = None,
+                            limit: int = None,
                             offset: int = None) -> dict:
         url = f'{self.base_uri}/rest/documents/{document_identifier.id}/files'
         params = {}
+        if type_id:
+            params['typeId'] = type_id
         if limit:
             params['limit'] = limit
         if offset:
