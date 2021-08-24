@@ -308,6 +308,19 @@ class TextRepoClient:
         # ic(response.links)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
+    def find_file_type(self, type_name: str) -> FileType:
+        for t in self.read_file_types():
+            if t.name == type_name:
+                return t
+        raise Exception(f'FileType "{type_name}" not found')
+
+    def find_latest_version(self, external_id: str, type_name: str) -> VersionIdentifier:
+        type_id = self.find_file_type(type_name).id
+        doc = self.read_documents(external_id).items[0]
+        file = self.read_document_files(doc, type_id)['items'][0]
+        ver = self.read_file_versions(file['id'])[0]
+        return ver
+
     def view_version_segments_by_index(self, version_id: str, start_index: str, end_index: str) -> List[str]:
         """
         Get fragment of version addressed by index anchors
