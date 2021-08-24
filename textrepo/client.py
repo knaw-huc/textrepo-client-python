@@ -128,7 +128,8 @@ class TextRepoClient:
 
     def purge_document(self, external_id: str) -> bool:
         """
-        Delete a document including its metadata, files, versions and contents. Contents are only deleted when not referenced by any other versions.
+        Delete a document including its metadata, files, versions and contents.
+        Contents are only deleted when not referenced by any other versions.
 
         :param external_id: the external Id
         :type external_id: str
@@ -318,7 +319,8 @@ class TextRepoClient:
         else:
             # if (self.raise_exceptions):
             raise Exception(
-                f'{response.request.method} {response.request.url} returned {status_code} {status_message} : "{response.text}"')
+                f'{response.request.method} {response.request.url} returned {status_code} {status_message}'
+                + ': "{response.text}"')
             # else:
             #     return Failure(response)
 
