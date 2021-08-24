@@ -245,18 +245,18 @@ class TextRepoClient:
         response = requests.post(url=url, json={"name": name, "mimetype": mimetype})
         return self.__handle_response(response, {HTTPStatus.CREATED: to_file_type})
 
-    def read_file_type(self, id: int) -> FileType:
-        url = f'{self.base_uri}/rest/types/{id}'
+    def read_file_type(self, type_id: int) -> FileType:
+        url = f'{self.base_uri}/rest/types/{type_id}'
         response = requests.get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: to_file_type})
 
-    def update_file_type(self, id: int, name: str, mimetype: str) -> FileType:
-        url = f'{self.base_uri}/rest/types/{id}'
+    def update_file_type(self, type_id: int, name: str, mimetype: str) -> FileType:
+        url = f'{self.base_uri}/rest/types/{type_id}'
         response = requests.put(url=url, json={"name": name, "mimetype": mimetype})
         return self.__handle_response(response, {HTTPStatus.OK: to_file_type})
 
-    def delete_file_type(self, id: int) -> bool:
-        url = f'{self.base_uri}/rest/types/{id}'
+    def delete_file_type(self, type_id: int) -> bool:
+        url = f'{self.base_uri}/rest/types/{type_id}'
         response = requests.delete(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: True})
 
