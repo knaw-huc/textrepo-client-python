@@ -304,6 +304,24 @@ class TextRepoClient:
         # ic(response.links)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
+    def view_version_segments_by_index(self, version_id: str, start_index: str, end_index: str) -> List[str]:
+        """
+        Get fragment of version addressed by index anchors
+
+        Gets the fragment of a segmented text between indices start_index and end_index (inclusive)
+
+        :param version_id: UUID of version of a file of type compatible with segmented text view
+        :param start_index: integer >= 0 or 'full' (implying index 0)
+        :param end_index: integer >= 0, <= total number of segments or 'full' (implying max index)
+        :return: list of strings comprising the requested fragment
+        """
+
+        url = f'{self.base_uri}/view/versions/{version_id}/segments/index/{start_index}/{end_index}'
+        from icecream import ic
+        ic(url)
+        response = requests.get(url=url)
+        return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
+
     def __handle_response(self, response: Response, result_producers: dict):
         status_code = response.status_code
         status_message = http.client.responses[status_code]
