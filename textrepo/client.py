@@ -109,7 +109,7 @@ class TextRepoClient:
         response = requests.post(url=url, json={"externalId": external_id})
         return self.__handle_response(response, {HTTPStatus.CREATED: to_document_identifier})
 
-    def update_document_externalId(self, document_id: DocumentIdentifier, external_id: str) -> DocumentIdentifier:
+    def update_document_external_id(self, document_id: DocumentIdentifier, external_id: str) -> DocumentIdentifier:
         url = f'{self.base_uri}/rest/documents/{document_id.id}'
         response = requests.put(url=url, json={"externalId": external_id})
         return self.__handle_response(response, {HTTPStatus.OK: to_document_identifier})
@@ -155,9 +155,9 @@ class TextRepoClient:
         response = requests.delete(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: True})
 
-    def create_document_file(self, document_identifier: DocumentIdentifier, typeId: int) -> FileIdentifier:
+    def create_document_file(self, document_identifier: DocumentIdentifier, type_id: int) -> FileIdentifier:
         url = f'{self.base_uri}/rest/files'
-        response = requests.post(url=url, json={'docId': document_identifier.id, 'typeId': typeId})
+        response = requests.post(url=url, json={'docId': document_identifier.id, 'typeId': type_id})
         return self.__handle_response(response, {HTTPStatus.CREATED: to_file_identifier})
 
     def read_file(self, file_id: uuid) -> FileIdentifier:
@@ -165,9 +165,9 @@ class TextRepoClient:
         response = requests.get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: to_file_identifier})
 
-    def update_document_file(self, document_identifier: DocumentIdentifier, typeId: int) -> FileIdentifier:
+    def update_document_file(self, document_identifier: DocumentIdentifier, type_id: int) -> FileIdentifier:
         url = f'{self.base_uri}/rest/files'
-        response = requests.put(url=url, data={'docId': document_identifier.id, 'typeId': typeId})
+        response = requests.put(url=url, data={'docId': document_identifier.id, 'typeId': type_id})
         return self.__handle_response(response, {HTTPStatus.OK: to_file_identifier})
 
     def delete_file(self, file_id: uuid) -> bool:

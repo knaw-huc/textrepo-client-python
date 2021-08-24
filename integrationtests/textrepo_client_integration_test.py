@@ -126,7 +126,7 @@ class TextRepoTestCase(unittest.TestCase):
         ok = TR.delete_file_type(xmlType.id)
         assert ok
 
-        docId = TR.update_document_externalId(document_id, "new_external_id")
+        docId = TR.update_document_external_id(document_id, "new_external_id")
         ic(docId)
         self.assertEqual("new_external_id", docId.externalId)
 
