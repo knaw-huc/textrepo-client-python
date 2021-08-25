@@ -321,7 +321,7 @@ class TextRepoClient:
         ver = self.read_file_versions(file['id'])[0]
         return ver
 
-    def view_version_segments_by_index(self, version_id: str, start_index: str, end_index: str) -> List[str]:
+    def view_version_segments_by_index(self, version_id: uuid, start_index: str, end_index: str) -> List[str]:
         """
         Get fragment of version addressed by index anchors
 
@@ -337,7 +337,7 @@ class TextRepoClient:
         response = requests.get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
-    def view_version_segments_substring_by_index(self, version_id: str,
+    def view_version_segments_substring_by_index(self, version_id: uuid,
                                                  start_index: str, start_char_offset: str,
                                                  end_index: str, end_char_offset: str) -> List[str]:
         url = f'{self.base_uri}/view/versions/{version_id}/segments/index' \
