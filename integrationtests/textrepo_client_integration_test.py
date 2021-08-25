@@ -128,7 +128,7 @@ class TextRepoTestCase(unittest.TestCase):
 
         docId = TR.update_document_external_id(document_id, "new_external_id")
         ic(docId)
-        self.assertEqual("new_external_id", docId.externalId)
+        self.assertEqual("new_external_id", docId.external_id)
 
         ok = TR.delete_document(readId)
         assert ok
@@ -161,7 +161,7 @@ def purge_all_documents():
         total = docPage.total
         docPage = TR.read_documents(limit=total)
         with Pool(5) as p:
-            p.map(TR.purge_document, [document.externalId for document in docPage.items])
+            p.map(TR.purge_document, [document.external_id for document in docPage.items])
 
         # for document in docPage.items:
         #     try:
