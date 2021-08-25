@@ -43,7 +43,7 @@ class FileLocator:
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
-class TextRepoFile:
+class FileIdentifier:
     id: uuid
     doc_id: uuid
     type_id: int
@@ -51,7 +51,7 @@ class TextRepoFile:
 
 @dataclass
 class FilesPage:
-    items: List[TextRepoFile]
+    items: List[FileIdentifier]
     page_limit: int
     page_offset: int
     total: int
@@ -211,6 +211,12 @@ class TextRepoClient:
             params['offset'] = offset
         response = requests.get(url=url, params=params)
         return self.__handle_response(response, {HTTPStatus.OK: to_files_page})
+
+    def resolve_file_location(self, file: FileIdentifier) -> FileLocator:
+        return FileLocator(id=file.id,
+                           doc_id=file.doc_id,
+                           type_id=file.type_id,
+                           url=f'{self.base_uri}/rest/files/{file.id}')
 
     def read_file_metadata(self, file_id: uuid) -> dict:
         url = f'{self.base_uri}/rest/files/{file_id}/metadata'
@@ -400,12 +406,7 @@ class TextRepoClient:
             raise Exception(
                 f'{response.request.method} {response.request.url} returned {status_code} {status_message}'
                 + ': "{response.text}"')
-            # else:
-            #     return Failure(response)
 
-
-# else:
-#     return Failure(response)
 
 def to_document_identifier(response: Response) -> DocumentIdentifier:
     return DocumentIdentifier.from_dict(response.json())
@@ -433,7 +434,7 @@ def to_documents_page(response: Response) -> DocumentsPage:
 
 def to_files_page(response: Response) -> FilesPage:
     json = response.json()
-    items = [TextRepoFile.from_dict(j) for j in json['items']]
+    items = [FileIdentifier.from_dict(j) for j in json['items']]
     page = json['page']
     return FilesPage(items=items,
                      page_limit=page['limit'],
