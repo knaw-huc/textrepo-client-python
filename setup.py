@@ -11,7 +11,7 @@ with open('LICENSE', encoding='utf8') as f:
 
 setup(
     name='textrepo',
-    version='0.3.0',
+    version='0.4.0',
     description='client to access textrepo',
     long_description=readme,
     author='Bram Buitendijk',
