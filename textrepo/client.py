@@ -8,6 +8,7 @@ from typing import List, Dict
 import requests
 from dataclasses_json import dataclass_json, config
 from dateutil.parser import isoparse
+from icecream import ic
 from marshmallow import fields
 from requests import Response
 
@@ -334,6 +335,15 @@ class TextRepoClient:
         """
 
         url = f'{self.base_uri}/view/versions/{version_id}/segments/index/{start_index}/{end_index}'
+        response = requests.get(url=url)
+        return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
+
+    def view_version_segments_substring_by_index(self, version_id: str,
+                                                 start_index: str, start_char_offset: str,
+                                                 end_index: str, end_char_offset: str) -> List[str]:
+        url = f'{self.base_uri}/view/versions/{version_id}/segments/index' \
+              f'/{start_index}/{start_char_offset}' \
+              f'/{end_index}/{end_char_offset}'
         response = requests.get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
