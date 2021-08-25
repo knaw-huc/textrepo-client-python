@@ -8,7 +8,6 @@ from typing import List, Dict
 import requests
 from dataclasses_json import dataclass_json, config
 from dateutil.parser import isoparse
-from icecream import ic
 from marshmallow import fields
 from requests import Response
 
