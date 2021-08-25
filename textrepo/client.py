@@ -329,7 +329,7 @@ class TextRepoClient:
 
         :param version_id: UUID of version of a file of type compatible with segmented text view
         :param start_index: integer >= 0 or 'full' (implying index 0)
-        :param end_index: integer >= 0, <= total number of segments or 'full' (implying max index)
+        :param end_index: integer <= total number of segments or 'full' (implying max index)
         :return: list of strings comprising the requested fragment
         """
 
@@ -340,6 +340,21 @@ class TextRepoClient:
     def view_version_segments_substring_by_index(self, version_id: uuid,
                                                  start_index: str, start_char_offset: str,
                                                  end_index: str, end_char_offset: str) -> List[str]:
+        """
+        Get substring of fragment of version addressed by index anchors and character offsets
+
+        Gets the 'substring' fragment of a segmented text between indices start_index and end_index (inclusive)
+        The first element of the fragment is reduced to the substring starting at start_char_offset and
+        the last element of the fragment is reduced to the substring ending at end_char_offset
+
+        :param version_id: UUID of version of a file of type compatible with segmented text view
+        :param start_index: integer >= 0 or 'full' (implying index 0)
+        :param start_char_offset: integer <= number of characters in first element or 'full' (implying offset 0)
+        :param end_index: integer <= total number of segments or 'full' (implying max index)
+        :param end_char_offset: integer <= number of characters in last element or 'full' (implying last character)
+        :return: list of strings comprising the requested fragment substrings
+        """
+
         url = f'{self.base_uri}/view/versions/{version_id}/segments/index' \
               f'/{start_index}/{start_char_offset}' \
               f'/{end_index}/{end_char_offset}'
