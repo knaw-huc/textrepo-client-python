@@ -6,7 +6,7 @@ from textrepo.client import TextRepoClient
 class TextRepoClientTestCase(unittest.TestCase):
     def test_init(self):
         client = TextRepoClient("http://example.org")
-        assert client != None
+        self.assertIsNotNone(client)
 
 
 if __name__ == '__main__':

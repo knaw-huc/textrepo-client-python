@@ -10,13 +10,13 @@ with open('LICENSE', encoding='utf8') as f:
     license = f.read()
 
 setup(
-    name='textrepo-client',
-    version='0.0.1',
+    name='textrepo',
+    version='0.4.0',
     description='client to access textrepo',
     long_description=readme,
     author='Bram Buitendijk',
     author_email='bram.buitendijk@di.huc.knaw.nl',
     url='https://github.com/knaw-huc/textrepo-client-python',
     license=license,
-    packages=find_packages(exclude=('integrationtests','tests', 'docs', 'notebooks'))
+    packages=find_packages(exclude=('integrationtests', 'tests', 'docs', 'notebooks'))
 )
