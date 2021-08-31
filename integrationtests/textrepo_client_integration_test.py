@@ -26,48 +26,48 @@ class TextRepoTestCase(unittest.TestCase):
         self.assertIsNotNone(about)
 
     def test_read_documents(self):
-        documentsPage = TR.read_documents()
-        ic(documentsPage)
-        self.assertIsNotNone(documentsPage)
-        self.assertEqual(10, documentsPage.page_limit)
-        self.assertEqual(0, documentsPage.page_offset)
+        documents_page = TR.read_documents()
+        ic(documents_page)
+        self.assertIsNotNone(documents_page)
+        self.assertEqual(10, documents_page.page_limit)
+        self.assertEqual(0, documents_page.page_offset)
 
     def test_read_documents_with_limit_and_offset(self):
-        documentsPage = TR.read_documents(limit=100, offset=201)
-        ic(documentsPage)
-        self.assertIsNotNone(documentsPage)
-        self.assertEqual(100, documentsPage.page_limit)
-        self.assertEqual(201, documentsPage.page_offset)
+        documents_page = TR.read_documents(limit=100, offset=201)
+        ic(documents_page)
+        self.assertIsNotNone(documents_page)
+        self.assertEqual(100, documents_page.page_limit)
+        self.assertEqual(201, documents_page.page_offset)
 
     def test_read_documents_with_externalId(self):
-        documentsPage = TR.read_documents(external_id='ga:xyz')
-        ic(documentsPage)
-        self.assertIsNotNone(documentsPage)
+        documents_page = TR.read_documents(external_id='ga:xyz')
+        ic(documents_page)
+        self.assertIsNotNone(documents_page)
 
     def test_read_documents_created_after(self):
-        documentsPage = TR.read_documents(created_after=datetime.today())
-        ic(documentsPage)
-        self.assertIsNotNone(documentsPage)
-        self.assertEqual(0, documentsPage.total)
+        documents_page = TR.read_documents(created_after=datetime.today())
+        ic(documents_page)
+        self.assertIsNotNone(documents_page)
+        self.assertEqual(0, documents_page.total)
 
     def test_file_type_crud(self):
         purge_file_types()
 
-        type = TR.create_file_type("httml", "application/text+html")
-        ic(type)
-        self.assertEqual("httml", type.name)
-        self.assertEqual("application/text+html", type.mimetype)
+        ftype = TR.create_file_type("httml", "application/text+html")
+        ic(ftype)
+        self.assertEqual("httml", ftype.name)
+        self.assertEqual("application/text+html", ftype.mimetype)
 
-        updated_type = TR.update_file_type(type.id, "html", "text/html")
+        updated_type = TR.update_file_type(ftype.id, "html", "text/html")
         self.assertEqual("html", updated_type.name)
         self.assertEqual("text/html", updated_type.mimetype)
-        self.assertEqual(type.id, updated_type.id)
+        self.assertEqual(ftype.id, updated_type.id)
 
         types = TR.read_file_types()
         self.assertEqual(1, len(types))
         self.assertEqual(updated_type, types[0])
 
-        ok = TR.delete_file_type(type.id)
+        ok = TR.delete_file_type(ftype.id)
         assert ok
 
         types = TR.read_file_types()
@@ -82,9 +82,9 @@ class TextRepoTestCase(unittest.TestCase):
         ic(document_id)
         self.assertIsNotNone(document_id)
 
-        readId = TR.read_document(document_id)
-        ic(readId)
-        self.assertEqual(document_id, readId)
+        read_id = TR.read_document(document_id)
+        ic(read_id)
+        self.assertEqual(document_id, read_id)
 
         files = TR.read_document_files(document_id)
         ic(files)
@@ -96,41 +96,41 @@ class TextRepoTestCase(unittest.TestCase):
         ic(metadata)
         self.assertEqual({"field": "value"}, metadata)
 
-        xmlType = TR.create_file_type("xml", "text/xml")
-        ic(xmlType)
+        xml_type = TR.create_file_type("xml", "text/xml")
+        ic(xml_type)
 
-        fileId = TR.create_document_file(document_id, xmlType.id)
-        ic(fileId)
+        file_id = TR.create_document_file(document_id, xml_type.id)
+        ic(file_id)
 
-        ok = TR.set_file_metadata(fileId.id, "creator", "ga-ner-tool")
+        ok = TR.set_file_metadata(file_id.id, "creator", "ga-ner-tool")
         assert ok
 
-        metadata = TR.read_file_metadata(fileId.id)
+        metadata = TR.read_file_metadata(file_id.id)
         ic(metadata)
         self.assertEqual("ga-ner-tool", metadata["creator"])
 
-        versions = TR.read_file_versions(fileId.id)
+        versions = TR.read_file_versions(file_id.id)
         ic(versions)
 
         file = StringIO('<xml>the contents of this version<</xml>')
         ic(type(file))
-        versionId = TR.create_version(fileId.id, file)
-        ic(versionId)
+        version_id = TR.create_version(file_id.id, file)
+        ic(version_id)
 
-        ok = TR.delete_file(fileId.id)
+        ok = TR.delete_file(file_id.id)
         assert ok
 
         ok = TR.delete_document_metadata(document_id, "field")
         assert ok
 
-        ok = TR.delete_file_type(xmlType.id)
+        ok = TR.delete_file_type(xml_type.id)
         assert ok
 
-        docId = TR.update_document_external_id(document_id, "new_external_id")
-        ic(docId)
-        self.assertEqual("new_external_id", docId.external_id)
+        doc_id = TR.update_document_external_id(document_id, "new_external_id")
+        ic(doc_id)
+        self.assertEqual("new_external_id", doc_id.external_id)
 
-        ok = TR.delete_document(readId)
+        ok = TR.delete_document(read_id)
         assert ok
 
     def test_document_purge(self):
@@ -148,8 +148,8 @@ def purge_file_types():
         print("no purging on external textrepo's!!")
         exit(-1)
     else:
-        for type in TR.read_file_types():
-            TR.delete_file_type(type.id)
+        for ftype in TR.read_file_types():
+            TR.delete_file_type(ftype.id)
 
 
 def purge_all_documents():
@@ -157,13 +157,13 @@ def purge_all_documents():
         print("no purging on external textrepo's!!")
         exit(-1)
     else:
-        docPage = TR.read_documents()
-        total = docPage.total
-        docPage = TR.read_documents(limit=total)
+        doc_page = TR.read_documents()
+        total = doc_page.total
+        doc_page = TR.read_documents(limit=total)
         with Pool(5) as p:
-            p.map(TR.purge_document, [document.external_id for document in docPage.items])
+            p.map(TR.purge_document, [document.external_id for document in doc_page.items])
 
-        # for document in docPage.items:
+        # for document in doc_page.items:
         #     try:
         #         TR.purge_document(document.externalId)
         #     except Exception:
