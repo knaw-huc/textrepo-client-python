@@ -10,6 +10,8 @@ from dataclasses_json import dataclass_json, config, LetterCase
 from marshmallow import fields
 from requests import Response
 
+import textrepo
+
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass
@@ -91,10 +93,11 @@ class FileType:
 
 class TextRepoClient:
 
-    def __init__(self, base_uri: str, verbose: bool = False):
+    def __init__(self, base_uri: str, verbose: bool = False, timeout_in_seconds: int = None):
         self.base_uri = base_uri.strip('/')
         self.raise_exception = True
         self.verbose = verbose
+        self.timeout = timeout_in_seconds
 
     def __str__(self):
         return f"TextRepoClient({self.base_uri})"
@@ -104,7 +107,7 @@ class TextRepoClient:
 
     def get_about(self) -> dict:
         url = f'{self.base_uri}/'
-        response = requests.get(url=url)
+        response = self.__get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
     def read_documents(self,
@@ -123,7 +126,7 @@ class TextRepoClient:
             params['limit'] = limit
         if offset:
             params['offset'] = offset
-        response = requests.get(url=url, params=params)
+        response = self.__get(url=url, params=params)
         return self.__handle_response(response, {HTTPStatus.OK: to_documents_page})
 
     def create_document(self, external_id: str) -> DocumentIdentifier:
@@ -139,7 +142,7 @@ class TextRepoClient:
     def read_document(self, document_identifier: DocumentIdentifier) -> DocumentIdentifier:
         """Retrieve document"""
         url = f'{self.base_uri}/rest/documents/{document_identifier.id}'
-        response = requests.get(url=url)
+        response = self.__get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: to_document_identifier})
 
     def delete_document(self, document_id: DocumentIdentifier) -> bool:
@@ -169,7 +172,7 @@ class TextRepoClient:
 
     def read_document_metadata(self, document_identifier: DocumentIdentifier) -> dict:
         url = f'{self.base_uri}/rest/documents/{document_identifier.id}/metadata'
-        response = requests.get(url=url)
+        response = self.__get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
     def delete_document_metadata(self, document_identifier: DocumentIdentifier, key: str) -> bool:
@@ -184,7 +187,7 @@ class TextRepoClient:
 
     def read_file(self, file_id: uuid) -> FileLocator:
         url = f'{self.base_uri}/rest/files/{file_id}'
-        response = requests.get(url=url)
+        response = self.__get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: to_file_identifier})
 
     def update_document_file(self, document_identifier: DocumentIdentifier, type_id: int) -> FileLocator:
@@ -209,7 +212,7 @@ class TextRepoClient:
             params['limit'] = limit
         if offset:
             params['offset'] = offset
-        response = requests.get(url=url, params=params)
+        response = self.__get(url=url, params=params)
         return self.__handle_response(response, {HTTPStatus.OK: to_files_page})
 
     def resolve_file_location(self, file: FileIdentifier) -> FileLocator:
@@ -220,7 +223,7 @@ class TextRepoClient:
 
     def read_file_metadata(self, file_id: uuid) -> dict:
         url = f'{self.base_uri}/rest/files/{file_id}/metadata'
-        response = requests.get(url=url)
+        response = self.__get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
     def set_file_metadata(self, file_id: uuid, key: str, value: str) -> bool:
@@ -249,7 +252,7 @@ class TextRepoClient:
             params['limit'] = limit
         if offset:
             params['offset'] = offset
-        response = requests.get(url=url, params=params)
+        response = self.__get(url=url, params=params)
         return self.__handle_response(response,
                                       {HTTPStatus.OK: lambda r: [VersionIdentifier.from_dict(d) for d in
                                                                  r.json()['items']]})
@@ -269,7 +272,7 @@ class TextRepoClient:
 
     def read_file_types(self) -> List[FileType]:
         url = f'{self.base_uri}/rest/types'
-        response = requests.get(url=url)
+        response = self.__get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: [FileType.from_dict(d) for d in r.json()]})
 
     def create_file_type(self, name: str, mimetype: str) -> FileType:
@@ -279,7 +282,7 @@ class TextRepoClient:
 
     def read_file_type(self, type_id: int) -> FileType:
         url = f'{self.base_uri}/rest/types/{type_id}'
-        response = requests.get(url=url)
+        response = self.__get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: to_file_type})
 
     def update_file_type(self, type_id: int, name: str, mimetype: str) -> FileType:
@@ -318,21 +321,21 @@ class TextRepoClient:
 
     def find_document_metadata(self, external_id: str) -> Dict[str, str]:
         url = f'{self.base_uri}/task/find/{external_id}/document/metadata'
-        response = requests.get(url=url)
+        response = self.__get(url=url)
         # ic(response.links)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
     def find_latest_file_contents(self, external_id: str, type_name: str) -> any:
         url = f'{self.base_uri}/task/find/{external_id}/file/contents'
         params = {'type': type_name}
-        response = requests.get(url=url, params=params)
+        response = self.__get(url=url, params=params)
         # ic(response.links)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.content})
 
     def find_file_metadata(self, external_id: str, type_name: str) -> Dict[str, str]:
         url = f'{self.base_uri}/task/find/{external_id}/file/metadata'
         params = {'type': type_name}
-        response = requests.get(url=url, params=params)
+        response = self.__get(url=url, params=params)
         # ic(response.links)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
@@ -346,8 +349,7 @@ class TextRepoClient:
         type_id = self.find_file_type(type_name).id
         doc = self.read_documents(external_id).items[0]
         file = self.read_document_files(doc, type_id).items[0]
-        ver = self.read_file_versions(file.id)[0]
-        return ver
+        return self.read_file_versions(file.id)[0]
 
     def view_version_segments_by_index(self, version_id: uuid, start_index: str, end_index: str) -> List[str]:
         """
@@ -362,7 +364,7 @@ class TextRepoClient:
         """
 
         url = f'{self.base_uri}/view/versions/{version_id}/segments/index/{start_index}/{end_index}'
-        response = requests.get(url=url)
+        response = self.__get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
     def view_version_segments_substring_by_index(self, version_id: uuid,
@@ -386,26 +388,50 @@ class TextRepoClient:
         url = f'{self.base_uri}/view/versions/{version_id}/segments/index' \
               f'/{start_index}/{start_char_offset}' \
               f'/{end_index}/{end_char_offset}'
-        response = requests.get(url=url)
+        response = self.__get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
+
+    def __get(self, url, params=None, **kwargs):
+        args = self.__set_defaults(kwargs)
+        return requests.get(url, params=params, **args)
+
+    def __post(self, url, data=None, json=None, **kwargs):
+        args = self.__set_defaults(kwargs)
+        return requests.post(url, data=data, json=json, **args)
+
+    def __put(self, url, data=None, **kwargs):
+        args = self.__set_defaults(kwargs)
+        return requests.put(url, data=data, **args)
+
+    def __delete(self, url, **kwargs):
+        args = self.__set_defaults(kwargs)
+        return requests.delete(url, **args)
+
+    def __set_defaults(self, args: dict):
+        if 'headers' not in args:
+            args['headers'] = {}
+        args['headers']['User-Agent'] = f'textrepo-python-client/{textrepo.__version__}'
+        if self.timeout:
+            args['timeout'] = self.timeout
+        return args
 
     def __handle_response(self, response: Response, result_producers: dict):
         status_code = response.status_code
         status_message = http.client.responses[status_code]
+        # ic(response.request.headers)
         if self.verbose:
             print(f'-> {response.request.method} {response.request.url}')
             print(f'<- {status_code} {status_message}')
-        if status_code in result_producers.keys():
-            result = result_producers[response.status_code](response)
+        if status_code in result_producers:
             # if (self.raise_exceptions):
-            return result
+            return result_producers[response.status_code](response)
             # else:
             #     return Success(response, result)
         else:
             # if (self.raise_exceptions):
             raise Exception(
                 f'{response.request.method} {response.request.url} returned {status_code} {status_message}'
-                + ': "{response.text}"')
+                + f': "{response.text}"')
 
 
 def to_document_identifier(response: Response) -> DocumentIdentifier:
