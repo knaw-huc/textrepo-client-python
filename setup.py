@@ -2,6 +2,7 @@
 
 from setuptools import setup, find_packages
 
+import textrepo
 
 with open('README.md', encoding='utf8') as f:
     readme = f.read()
@@ -11,7 +12,7 @@ with open('LICENSE', encoding='utf8') as f:
 
 setup(
     name='textrepo',
-    version='0.4.0',
+    version=textrepo.__version__,
     description='client to access textrepo',
     long_description=readme,
     author='Bram Buitendijk',
