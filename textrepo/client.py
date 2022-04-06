@@ -149,7 +149,7 @@ class TextRepoClient:
         """Delete document"""
         url = f'{self.base_uri}/rest/documents/{document_id.id}'
         response = requests.delete(url=url)
-        return self.__handle_response(response, {HTTPStatus.OK: lambda r: True})
+        return self.__handle_response(response, {HTTPStatus.NO_CONTENT: lambda r: True})
 
     def purge_document(self, external_id: str) -> bool:
         """
@@ -198,7 +198,7 @@ class TextRepoClient:
     def delete_file(self, file_id: uuid) -> bool:
         url = f'{self.base_uri}/rest/files/{file_id}'
         response = requests.delete(url=url)
-        return self.__handle_response(response, {HTTPStatus.OK: lambda r: True})
+        return self.__handle_response(response, {HTTPStatus.NO_CONTENT: lambda r: True})
 
     def read_document_files(self, document_identifier: DocumentIdentifier,
                             type_id: int = None,
