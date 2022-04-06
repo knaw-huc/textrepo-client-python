@@ -93,14 +93,15 @@ class FileType:
 
 class TextRepoClient:
 
-    def __init__(self, base_uri: str, verbose: bool = False, timeout_in_seconds: int = None):
+    def __init__(self, base_uri: str, verbose: bool = False, timeout_in_seconds: int = None, api_key=None):
+        self.api_key = api_key
         self.base_uri = base_uri.strip('/')
         self.raise_exception = True
-        self.verbose = verbose
         self.timeout = timeout_in_seconds
+        self.verbose = verbose
 
     def __str__(self):
-        return f"TextRepoClient({self.base_uri})"
+        return f'TextRepoClient({self.base_uri},api_key={self.api_key})'
 
     def __repr__(self):
         return self.__str__()
@@ -411,6 +412,8 @@ class TextRepoClient:
         if 'headers' not in args:
             args['headers'] = {}
         args['headers']['User-Agent'] = f'textrepo-python-client/{textrepo.__version__}'
+        if self.api_key:
+            args['headers']['Authorization'] = f'Basic: {self.api_key}'
         if self.timeout:
             args['timeout'] = self.timeout
         return args
