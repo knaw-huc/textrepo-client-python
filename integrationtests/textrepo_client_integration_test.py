@@ -8,7 +8,8 @@ from icecream import ic
 
 from textrepo.client import TextRepoClient
 
-TR = TextRepoClient(base_uri='http://localhost:8080/textrepo/', verbose=True)
+TR = TextRepoClient(base_uri='http://localhost:8080/textrepo/', verbose=True,
+                    api_key='YWFwOm5vb3QwLW1pZXMxLXNlY3JldC1rZXktaXMtZ2Vlbi11dWlk')
 
 
 class TextRepoTestCase(unittest.TestCase):
