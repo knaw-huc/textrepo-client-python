@@ -413,7 +413,7 @@ class TextRepoClient:
             args['headers'] = {}
         args['headers']['User-Agent'] = f'textrepo-python-client/{textrepo.__version__}'
         if self.api_key:
-            args['headers']['Authorization'] = f'Basic: {self.api_key}'
+            args['headers']['Authorization'] = f'Basic {self.api_key}'
         if self.timeout:
             args['timeout'] = self.timeout
         return args
