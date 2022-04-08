@@ -19,12 +19,6 @@ poetry add annorepo-client
 pip install annorepo-client
 ```
 
-### locally, after checking out this repo first
-
-```commandline
-pip install .
-```
-
 ----
 
 [USAGE](USAGE.md) |
