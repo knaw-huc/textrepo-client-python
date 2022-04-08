@@ -27,5 +27,5 @@ pip install .
 
 ----
 
-[USAGE](usage.md) |
+[USAGE](USAGE.md) |
 [CONTRIBUTING](CONTRIBUTING.md)

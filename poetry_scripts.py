@@ -17,11 +17,11 @@ def version(argv=None):
         lines = f.readlines()
     with open(project_init_file, 'w') as f:
         init_has_version = False
-        for l in lines:
-            if l.startswith('__version__'):
+        for line in lines:
+            if line.startswith('__version__'):
                 init_has_version = True
                 f.write(f"__version__ = '{new_version}'\n")
             else:
-                f.write(l)
+                f.write(line)
         if not init_has_version:
             f.write(f"__version__ = '{new_version}'\n")
