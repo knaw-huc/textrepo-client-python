@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "textrepo-client"
-version = "0.5.0"
+version = "0.5.1"
 description = "A Python client to access a textrepo server"
 authors = ["Bram Buitendijk <bram.buitendijk@di.huc.knaw.nl>", "Hayco de Jong <hayco.de.jong@di.huc.knaw.nl>"]
 license = "MIT"
