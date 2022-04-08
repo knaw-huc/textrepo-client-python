@@ -1,5 +1,8 @@
+import importlib
 import unittest
+from importlib.metadata import version
 
+import pkg_resources
 from icecream import ic
 
 from textrepo.client import TextRepoClient
@@ -23,6 +26,11 @@ class TextRepoClientTestCase(unittest.TestCase):
         client = TextRepoClient("https://globalise.tt.di.huc.knaw.nl/textrepo/", timeout_in_seconds=20)
         ft = client.read_file_types()
         ic(ft)
+        a = client.get_about()
+        ic(a)
+        v = version('textrepo')
+        # v = pkg_resources.get_distribution('textrepo-client').version
+        ic(v)
 
 
 if __name__ == '__main__':
