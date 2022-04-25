@@ -26,7 +26,7 @@ pytest = "^6.2.5"
 icecream = "^2.1.2"
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/brambg/annorepo-python-client/issues"
+"Bug Tracker" = "https://github.com/knaw-huc/textrepo-client-python/issues"
 
 [tool.poetry.scripts]
 version = 'poetry_scripts:version'
