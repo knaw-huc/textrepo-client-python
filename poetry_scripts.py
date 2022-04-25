@@ -7,7 +7,10 @@ project_init_file = 'textrepo/__init__.py'
 def version(argv=None):
     if not argv:
         argv = sys.argv
-    parameter = argv[1]
+    if len(argv) > 1:
+        parameter = argv[1]
+    else:
+        parameter = ""
     result = subprocess.run(["poetry", "version", parameter], capture_output=True)
     stdout = result.stdout.decode().strip()
     print(stdout)
