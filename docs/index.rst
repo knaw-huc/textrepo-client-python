@@ -40,7 +40,7 @@ https://github.com/knaw-huc/textrepo-client-python/issues
 Contribute
 ----------
 
-Want to improve textrepo-client? Submit a pull request at:
+Want to improve |tr|? Submit a pull request at:
 
 https://github.com/knaw-huc/textrepo-client-python
 
