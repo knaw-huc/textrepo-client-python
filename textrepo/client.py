@@ -398,15 +398,15 @@ class TextRepoClient:
 
     def __post(self, url, data=None, json=None, **kwargs):
         args = self.__set_defaults(kwargs)
-        return requests.post(url, data=data, json=json, **args)
+        return requests.post(url, data=data, json=json, allow_redirects=False, **args)
 
     def __put(self, url, data=None, **kwargs):
         args = self.__set_defaults(kwargs)
-        return requests.put(url, data=data, **args)
+        return requests.put(url, data=data, allow_redirects=False, **args)
 
     def __delete(self, url, **kwargs):
         args = self.__set_defaults(kwargs)
-        return requests.delete(url, **args)
+        return requests.delete(url, allow_redirects=False, **args)
 
     def __set_defaults(self, args: dict):
         if 'headers' not in args:
