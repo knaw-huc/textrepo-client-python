@@ -271,6 +271,10 @@ class TextRepoClient:
         response = self.__put(url=url, data=value)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: True})
 
+    def has_file_type_with_name(self, name: str) -> bool:
+        file_types = self.read_file_types()
+        return name in {ft.name for ft in file_types}
+
     def read_file_types(self) -> List[FileType]:
         url = f'{self.base_uri}/rest/types'
         response = self.__get(url=url)
