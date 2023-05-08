@@ -18,7 +18,7 @@ classifiers = [
 python = "^3.7"
 dataclasses-json = "^0.5.7"
 marshmallow = "^3.15.0"
-python-dateutil = "2.8.1"
+python-dateutil = "^2.8.1"
 requests = "^2.27.1"
 
 [tool.poetry.dev-dependencies]
