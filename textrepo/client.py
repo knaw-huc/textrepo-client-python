@@ -3,7 +3,7 @@ import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
 from http import HTTPStatus
-from typing import List, Dict
+from typing import List, Dict, Union
 
 import requests
 from dataclasses_json import dataclass_json, config, LetterCase
@@ -146,6 +146,20 @@ class TextRepoClient:
         response = self.__get(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: to_document_identifier})
 
+    def read_document_by_uuid(self, document_uuid: str) -> Union[DocumentIdentifier, None]:
+        """Retrieve document using its UUID"""
+        url = f'{self.base_uri}/rest/documents/{document_uuid}'
+        response = self.__get(url=url)
+        return self.__handle_response(response, {HTTPStatus.OK: to_document_identifier})
+
+    def read_document_by_external_id(self, external_uid: str) -> Union[DocumentIdentifier, None]:
+        """Retrieve document using its external id"""
+        matching_docs = self.read_documents(external_id=external_uid).items
+        if matching_docs:
+            return matching_docs[0]
+        else:
+            return None
+
     def delete_document(self, document_id: DocumentIdentifier) -> bool:
         """Delete document"""
         url = f'{self.base_uri}/rest/documents/{document_id.id}'
@@ -168,7 +182,7 @@ class TextRepoClient:
 
     def set_document_metadata(self, document_id: uuid, key: str, value: str) -> dict:
         url = f'{self.base_uri}/rest/documents/{document_id}/metadata/{key}'
-        response = self.__put(url=url, data=value)
+        response = self.__put(url=url, data=value.encode('utf-8'))
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
     def read_document_metadata(self, document_identifier: DocumentIdentifier) -> dict:
@@ -328,7 +342,7 @@ class TextRepoClient:
         url = f'{self.base_uri}/task/find/{external_id}/document/metadata'
         response = self.__get(url=url)
         # ic(response.links)
-        return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
+        return self.__handle_response(response, {HTTPStatus.OK: lambda r: (r.links, r.json())})
 
     def find_latest_file_contents(self, external_id: str, type_name: str) -> any:
         url = f'{self.base_uri}/task/find/{external_id}/file/contents'
@@ -342,7 +356,7 @@ class TextRepoClient:
         params = {'type': type_name}
         response = self.__get(url=url, params=params)
         # ic(response.links)
-        return self.__handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
+        return self.__handle_response(response, {HTTPStatus.OK: lambda r: (r.links, r.json())})
 
     def find_file_type(self, type_name: str) -> FileType:
         for t in self.read_file_types():
