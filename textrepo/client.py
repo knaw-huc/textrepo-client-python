@@ -428,6 +428,9 @@ class TextRepoClient:
         response = self._get(url=url)
         return self._handle_response(response, {HTTPStatus.OK: lambda r: r.json()})
 
+    def version_uri(self, version_uuid: str) -> str:
+        return f'{self.base_uri}/rest/versions/{version_uuid}'
+
     def _get(self, url, params=None, **kwargs):
         args = self._set_defaults(kwargs)
         return self.session.get(url, params=params, **args)
