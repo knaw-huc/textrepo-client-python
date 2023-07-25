@@ -99,12 +99,23 @@ class TextRepoClient:
         self.raise_exception = True
         self.timeout = timeout_in_seconds
         self.verbose = verbose
+        self.session = requests.Session()
 
     def __str__(self):
         return f'TextRepoClient({self.base_uri},api_key={self.api_key})'
 
     def __repr__(self):
         return self.__str__()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        # logger.info(f"closing session with args: {args}")
+        self.session.close()
+
+    def close(self):
+        self.__exit__()
 
     def get_about(self) -> dict:
         url = f'{self.base_uri}/'
@@ -419,19 +430,19 @@ class TextRepoClient:
 
     def __get(self, url, params=None, **kwargs):
         args = self.__set_defaults(kwargs)
-        return requests.get(url, params=params, **args)
+        return self.session.get(url, params=params, **args)
 
     def __post(self, url, data=None, json=None, **kwargs):
         args = self.__set_defaults(kwargs)
-        return requests.post(url, data=data, json=json, allow_redirects=False, **args)
+        return self.session.post(url, data=data, json=json, allow_redirects=False, **args)
 
     def __put(self, url, data=None, **kwargs):
         args = self.__set_defaults(kwargs)
-        return requests.put(url, data=data, allow_redirects=False, **args)
+        return self.session.put(url, data=data, allow_redirects=False, **args)
 
     def __delete(self, url, **kwargs):
         args = self.__set_defaults(kwargs)
-        return requests.delete(url, allow_redirects=False, **args)
+        return self.session.delete(url, allow_redirects=False, **args)
 
     def __set_defaults(self, args: dict):
         if 'headers' not in args:
