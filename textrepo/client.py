@@ -3,7 +3,7 @@ import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
 from http import HTTPStatus
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Any
 
 import requests
 from dataclasses_json import dataclass_json, config, LetterCase
@@ -272,7 +272,7 @@ class TextRepoClient:
                                       {HTTPStatus.OK: lambda r: [VersionIdentifier.from_dict(d) for d in
                                                                  r.json()['items']]})
 
-    def create_version(self, file_id: uuid, file) -> VersionIdentifier:
+    def create_version(self, file_id: uuid, file: Any) -> VersionIdentifier:
         url = f'{self.base_uri}/rest/versions'
         files = {'contents': file}
         data = {'fileId': file_id}
@@ -314,14 +314,21 @@ class TextRepoClient:
         response = self.__delete(url=url)
         return self.__handle_response(response, {HTTPStatus.OK: lambda r: True})
 
-    def import_version(self, external_id: str, type_name: str, contents, allow_new_document: bool = False,
-                       as_latest_version: bool = False) -> VersionInfo:
+    def import_version(self,
+                       external_id: str,
+                       type_name: str,
+                       contents: Any,
+                       allow_new_document: bool = False,
+                       as_latest_version: bool = False
+                       ) -> VersionInfo:
         url = f'{self.base_uri}/task/import/documents/{external_id}/{type_name}'
         params = {'allowNewDocument': allow_new_document, 'asLatestVersion': as_latest_version}
         files = {'contents': contents}
         response = self.__post(url=url, params=params, files=files)
-        return self.__handle_response(response, {HTTPStatus.OK: lambda r: VersionInfo.from_dict(r.json()),
-                                                 HTTPStatus.CREATED: lambda r: VersionInfo.from_dict(r.json())})
+        return self.__handle_response(response, {
+            HTTPStatus.OK: lambda r: VersionInfo.from_dict(r.json()),
+            HTTPStatus.CREATED: lambda r: VersionInfo.from_dict(r.json())
+        })
 
     def index_file(self, external_id: str, type_name: str) -> bool:
         url = f'{self.base_uri}/task/index/file/{external_id}/{type_name}'
