@@ -290,6 +290,11 @@ class TextRepoClient:
         response = self._post(url=url, files=files, data=data)
         return self._handle_response(response, {HTTPStatus.CREATED: to_version_identifier})
 
+    def read_version_contents(self, version_id: uuid):
+        url = f'{self.base_uri}/rest/versions/{version_id}/contents'
+        response = self._get(url=url)
+        return self._handle_response(response, {HTTPStatus.OK: lambda r: r.content})
+
     def set_version_metadata(self, version_id: uuid, key: str, value: str) -> bool:
         """Create or update version metadata entry"""
         url = f'{self.base_uri}/rest/versions/{version_id}/metadata/{key}'
