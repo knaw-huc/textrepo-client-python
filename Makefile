@@ -1,6 +1,7 @@
 .PHONY: docs docs-source help clean tests install publish version-update-patch version-update-minor version-update-major
 
 all: help
+SHELL=/bin/bash
 
 docs:
 	cd docs && rm -rf generated && make clean && make html
@@ -39,13 +40,15 @@ help:
 	@echo "make-tools for textrepo-client"
 	@echo
 	@echo "Please use \`make <target>', where <target> is one of:"
-	@echo "  install                to install the necessary requirements"
-	@echo "  apidoc-source          to build or update the apidoc source files in docs/source/api"
-	@echo "  docs                   to build or update the documentation pages in docs/_build"
-	@echo "  clean                  to remove all generated files and directories"
-	@echo "  tests                  to run the unit tests in tests/"
-	@echo "  version-update-patch   to update the project version to the next patch version"
-	@echo "  version-update-minor   to update the project version to the next minor version"
-	@echo "  version-update-major   to update the project version to the next major version"
-	@echo "  publish                to publish to pypi"
-	@echo "  docs/requirements.txt  to update the requirements.txt based on poetry.lock (required by readthedocs)"
+	@echo "  install               - to install the necessary requirements"
+	@echo "  pdoc                  - generate pdoc html pages in docs"
+	@echo "  clean                 - to remove all generated files and directories"
+	@echo "  tests                 - to run the unit tests in tests/"
+	@echo
+	@echo "  version-update-patch  - to update the project version to the next patch version"
+	@echo "  version-update-minor  - to update the project version to the next minor version"
+	@echo "  version-update-major  - to update the project version to the next major version"
+	@echo
+	@echo "  publish               - to publish to pypi"
+	@echo "  docs/requirements.txt - to update the requirements.txt based on poetry.lock (required by readthedocs)"
+	@echo
